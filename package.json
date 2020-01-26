@@ -1,0 +1,28 @@
+{
+  "name": "cozyvec",
+  "version": "0.1.0",
+  "description": "app for creating generative svg files with a custom lua subset language",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brubsby/cozyvec.git"
+  },
+  "keywords": [
+    "svg",
+    "generative",
+    "lua"
+  ],
+  "author": "brubsby",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brubsby/cozyvec/issues"
+  },
+  "homepage": "https://github.com/brubsby/cozyvec#readme",
+  "dependencies": {
+    "@mstrodl/fengari": "^0.2.0",
+    "@svgdotjs/svg.js": "^3.0.16"
+  }
+}
