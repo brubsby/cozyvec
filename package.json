@@ -1,7 +1,7 @@
 {
   "name": "cozyvec",
   "version": "0.1.0",
-  "description": "app for creating generative svg files with a custom lua subset language",
+  "description": "app for generating svg files with a dialect of lua",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
