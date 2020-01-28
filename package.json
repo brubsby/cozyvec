@@ -23,6 +23,7 @@
   "homepage": "https://github.com/brubsby/cozyvec#readme",
   "dependencies": {
     "@mstrodl/fengari": "^0.2.0",
-    "@svgdotjs/svg.js": "^3.0.16"
+    "@svgdotjs/svg.js": "^3.0.16",
+    "highlight.js": "^9.18.0"
   }
 }
