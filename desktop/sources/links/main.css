@@ -1,2 +1,6 @@
-body {background-color: black}
-textarea {background-color:black; border:1px solid black; color:white; padding:8px; font-family:courier_new monospace; resize:none; cols="80"}
+body {margin:0; background-color: black}
+
+#cozyvec {height:calc(100vh - 60px); width:calc(100vw - 60px); padding:30px; overflow:hidden;}
+#cozyvec #wrapper {overflow:hidden; position:relative;}
+#cozyvec #wrapper #code {position:relative; width:calc(50vw - 30px); height:calc(100vh - 60px);padding-right: 30px;}
+#cozyvec #wrapper #code textarea {background:none; border:none; color:white; height:100%; width:100%; font-family:courier_new monospace; resize:none; outline:none; font-size: 12px; line-height: 15px;}
