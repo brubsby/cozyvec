@@ -3,5 +3,5 @@ body {margin:0; background-color: black}
 #cozyvec {height:calc(100vh - 60px); width:calc(100vw - 60px); padding:30px; overflow:hidden;}
 #cozyvec #wrapper {overflow:hidden; position:relative;}
 #cozyvec #wrapper #codearea {position:relative; width:calc(50vw - 45px); height:calc(100vh - 60px);padding-right: 30px;}
-#cozyvec #wrapper #codearea textarea {background:none; border:none; color:white; height:100%; width:100%; font-family:courier_new monospace; resize:none; outline:none; font-size: 12px; line-height: 15px;}
-#cozyvec #wrapper #plotarea, #cozyvec #wrapper #plotarea #paper { position: absolute; left: calc(50vw - 15px); top:0px; -webkit-user-select: none;-webkit-app-region: no-drag; width: calc(50vw - 45px); height: calc(100vh - 60px)}
+#cozyvec #wrapper #codearea textarea {background:none; border:none; color:white; height:100%; width:100%; font-family:courier_new monospace; resize:none; outline:none; font-size:12px; line-height:15px;}
+#cozyvec #wrapper #plotarea {background-color:white; position:absolute; left:calc(50vw - 15px); top:0px; -webkit-user-select:none; -webkit-app-region:no-drag; width:calc(50vw - 105px); height:calc(100vh - 120px); margin:30px; box-shadow: rgba(255, 255, 255, 0.5) 3px 3px 20px 0px;}
