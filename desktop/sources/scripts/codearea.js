@@ -13,4 +13,8 @@ function CodeArea(client) {
   this.start = function() {
     this._input.focus()
   }
+
+  this.run = function(txt = this._input.value) {
+    client.run(txt)
+  }
 }
