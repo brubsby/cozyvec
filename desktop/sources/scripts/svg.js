@@ -21,7 +21,7 @@ export function polylinesToSVG (polylines, opt = {}) {
   const viewHeight = (dimensions[1] * TO_PX).toFixed(decimalPlaces);
   const fillStyle = opt.fillStyle || 'none';
   const strokeStyle = opt.strokeStyle || 'black';
-  const lineWidth = defined(opt.lineWidth, DEFAULT_SVG_LINE_WIDTH);
+  const lineWidth = opt.lineWidth !== undefined ? opt.lineWidth : DEFAULT_SVG_LINE_WIDTH;
 
   return `<?xml version="1.0" standalone="no"?>
   <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"

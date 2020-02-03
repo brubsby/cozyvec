@@ -1,8 +1,8 @@
 'use strict'
 
-function Code(client) {
+function CodeArea(client) {
   this.el = document.createElement('div')
-  this.el.id = 'code'
+  this.el.id = 'codearea'
   this._input = document.createElement('textarea')
 
   this.install = function(host) {
