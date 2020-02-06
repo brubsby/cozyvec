@@ -3,8 +3,8 @@
 function PaperSizes () {
 
   const SIZES = [
-    [ 'Half-Letter', 140, 216, 'North American', 'Common' ],
     [ 'Letter', 216, 279, 'North American', 'Common' ],
+    [ 'Half-Letter', 140, 216, 'North American', 'Common' ],
     [ 'Legal', 216, 356, 'North American', 'Common' ],
     [ 'Junior-Legal', 127, 203, 'North American', 'Common' ],
     [ 'Ledger/Tabloid', 279, 432, 'North American', 'Common' ],

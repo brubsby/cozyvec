@@ -25,7 +25,7 @@ app.on('ready', () => {
  })
 
  app.win.loadFile('index.html')
- app.inspect()
+ //app.inspect()
 
  app.win.on('closed', function () {
    app.win = null

@@ -71,13 +71,50 @@ function Client() {
     }
   }
 
+  this.api = [
+    [Math.PI, ["PI"]],
+    [Math.PI*2, ["TAU", "TWO_PI"]],
+    [Math.PI/2, ["HPI", "HALF_PI"]],
+    [Math.PI/4, ["QPI", "QUARTER_PI"]],
+    [Math.pow, ["pow"]],
+    [Math.sqrt, ["sqrt"]],
+    [Math.abs, ["abs"]],
+    [Math.ceil, ["ceil"]],
+    [Math.floor, ["flr", "floor"]],
+    [Math.sign, ["sgn", "sign"]],
+    [Math.sin, ["sin"]],
+    [Math.cos, ["cos"]],
+    [Math.tan, ["tan"]],
+    [Math.asin, ["asin"]],
+    [Math.acos, ["acos"]],
+    [Math.atan, ["atan"]],
+    [Math.atan2, ["atan2"]],
+    [Math.min, ["min"]],
+    [Math.max, ["max"]],
+    [Math.random, ["rnd", "random"]],
+    [this.plotarea.width, ["W", "WIDTH"]],
+    [this.plotarea.height, ["H", "HEIGHT"]],
+    [this.plotarea.lineTo.bind(this.plotarea), ["L2", "lineTo"]],
+    [this.plotarea.moveTo.bind(this.plotarea), ["M2", "moveTo"]],
+    [(x) => Math.pow(x,2)), ["sqr"]],
+    [(x) => Math.pow(x,3)), ["cub"]],
+    [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
+    [(low,x,high) => Math.max(Math.min(x,high),low), ["mid"]]
+  ]
+
   this.run = function(txt) {
     let functionBody = [
     "'use strict'",
     ""
     ].join("\n")
     functionBody += txt
-    const drawFunction = new Function("W","H","PI","TAU","L2","M2",functionBody)
-    drawFunction(this.plotarea.width, this.plotarea.height, Math.PI, Math.PI*2, this.plotarea.lineTo.bind(this.plotarea), this.plotarea.moveTo.bind(this.plotarea))
+    const flatApi = {}
+    for (const parameterList of this.api) {
+      for (const alias of parameterList[1]) {
+        flatApi[alias] = parameterList[0]
+      }
+    }
+    const drawFunction = new Function(...Object.keys(flatApi),functionBody)
+    drawFunction(...Object.values(flatApi))
   }
 }
