@@ -4,6 +4,7 @@ function Acels (client) {
   this.all = {}
   this.roles = {}
   this.pipe = null
+  this.templates = []
 
   this.install = (host = window) => {
     host.addEventListener('keydown', this.onKeyDown, false)
@@ -13,6 +14,10 @@ function Acels (client) {
   this.set = (cat, name, accelerator, downfn, upfn) => {
     if (this.all[accelerator]) { console.warn('Acels', `Trying to overwrite ${this.all[accelerator].name}, with ${name}.`) }
     this.all[accelerator] = { cat, name, downfn, upfn, accelerator }
+  }
+
+  this.addTemplate = (template) => {
+    this.templates.push(template)
   }
 
   this.add = (cat, role) => {
@@ -92,18 +97,19 @@ function Acels (client) {
 
   // Electron specifics
 
-  this.inject = (name = 'Untitled') => {
+  this.inject = (name = 'Untitled', githubUser = 'hundredrabbits') => {
     const app = require('electron').remote.app
     const injection = []
 
     injection.push({
       label: name,
       submenu: [
-        { label: 'About', click: () => { require('electron').shell.openExternal('https://github.com/brubsby/' + name) } },
+        { label: 'About', click: () => { require('electron').shell.openExternal('https://github.com/' + githubUser + '/' + name) } },
         { label: 'Fullscreen', accelerator: 'CmdOrCtrl+Enter', click: () => { app.toggleFullscreen() } },
         { label: 'Hide', accelerator: 'CmdOrCtrl+H', click: () => { app.toggleVisible() } },
         { label: 'Toggle Menubar', accelerator: 'Alt+H', click: () => { app.toggleMenubar() } },
         { label: 'Inspect', accelerator: 'CmdOrCtrl+.', click: () => { app.inspect() } },
+        { label: 'Refresh', accelerator: 'F5', click: () => { app.reload() } },
         { role: 'quit' }
       ]
     })
@@ -122,6 +128,11 @@ function Acels (client) {
       }
       injection.push({ label: cat, submenu: submenu })
     }
+
+    for (const template of this.templates) {
+      injection.push(template)
+    }
+
     app.injectMenu(injection)
   }
 }

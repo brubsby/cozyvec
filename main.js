@@ -15,13 +15,17 @@ app.on('ready', () => {
   app.win = new BrowserWindow({
    width: 800,
    height: 600,
+   minWidth: 380,
+   minHeight: 360,
+   backgroundColor: '#000',
    webPreferences: {
-     preload: path.join(__dirname, 'preload.js'), nodeIntegration: true
+     nodeIntegration: true
    }
 
  })
 
  app.win.loadFile('index.html')
+ app.inspect()
 
  app.win.on('closed', function () {
    app.win = null
@@ -41,6 +45,10 @@ app.on('activate', function () {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow()
 })
+
+app.reload = function () {
+  app.win.reload()
+}
 
 app.inspect = function () {
   app.win.toggleDevTools()

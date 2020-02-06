@@ -6,6 +6,7 @@
   <script type="text/javascript" src="desktop/sources/scripts/codearea.js"></script>
   <script type="text/javascript" src="desktop/sources/scripts/plotarea.js"></script>
   <script type="text/javascript" src="desktop/sources/scripts/client.js"></script>
+  <script type="text/javascript" src="desktop/sources/scripts/papersizes.js"></script>
   <script type="text/javascript" src="desktop/sources/lib/acels.js"></script>
   <title>cozyvec</title>
 </head>
@@ -17,7 +18,7 @@
 
     window.addEventListener('load', () => {
       client.start()
-      client.acels.inject('Cozyvec')
+      client.acels.inject('Cozyvec', 'brubsby')
     })
   </script>
 

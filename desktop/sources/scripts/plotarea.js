@@ -6,7 +6,7 @@ function PlotArea(client) {
 
   this.width = this.el.width
   this.height = this.el.height
-  this.ratio = window.devicePixelRatio
+  this.pixelRatio = window.devicePixelRatio
   this.context = this.el.getContext('2d')
 
   this.lastX = 0

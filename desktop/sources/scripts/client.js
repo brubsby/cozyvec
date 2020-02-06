@@ -7,6 +7,7 @@ function Client() {
   this.acels = new Acels(this)
   this.codearea = new CodeArea(this)
   this.plotarea = new PlotArea(this)
+  this.papersizes = new PaperSizes()
 
   this.bindings = {}
 
@@ -31,14 +32,12 @@ function Client() {
     this.acels.add('Edit', 'paste')
     this.acels.add('Edit', 'selectAll')
 
-    // this.acels.set('View', 'Toggle Guides', 'CmdOrCtrl+Shift+H', () => { this.surface.toggleGuides() })
-    // this.acels.set('View', 'Toggle Commander', 'CmdOrCtrl+K', () => { this.commander.toggle() })
-    // this.acels.set('View', 'Expand Commander', 'CmdOrCtrl+Shift+K', () => { this.commander.toggle(true) })
-
     this.acels.set('Project', 'Run', 'CmdOrCtrl+R', () => { this.codearea.run() })
     // this.acels.set('Project', 'Reload Run', 'CmdOrCtrl+Shift+R', () => { this.source.revert(); this.commander.run() })
     // this.acels.set('Project', 'Re-Indent', 'CmdOrCtrl+Shift+I', () => { this.commander.reindent() })
     // this.acels.set('Project', 'Clean', 'Escape', () => { this.commander.cleanup() })
+
+    this.acels.addTemplate(this.papersizes.buildMenuTemplate((dims) => {}))
 
     this.acels.install(window)
     this.acels.pipe(this)
