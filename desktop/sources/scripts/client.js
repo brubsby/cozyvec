@@ -1,7 +1,5 @@
 'use strict'
 
-var simplex = {}
-
 function Client() {
   this.el = document.createElement('div')
   this.el.id = 'cozyvec'
@@ -9,8 +7,8 @@ function Client() {
   this.acels = new Acels(this)
   this.codearea = new CodeArea(this)
   this.plotarea = new PlotArea(this)
+  this.api = new Api(this)
   this.papersizes = new PaperSizes()
-  this.simplex = new SimplexNoise()
 
   this.bindings = {}
 
@@ -71,87 +69,5 @@ function Client() {
     }
   }
 
-  this.seed = (seed = 0) => {
-    Math.seedrandom(seed)
-    this.simplex = new SimplexNoise(seed)
-  }
-
-  this.noise = (coords, frequency = 1, amplitude = 1, octaves = 1, lacunarity = 2, gain = 0.5) => {
-    var octave_amplitude = amplitude;
-    var octave_frequency = frequency;
-    var result = 0;
-    for (var i = 0; i < octaves; i++) {
-      if (Array.isArray(coords)) {
-        switch (coords.length) {
-          case 1:
-            result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords[0], 0);
-            break;
-          case 2:
-            result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords[0], octave_frequency * coords[1]);
-            break;
-          case 3:
-            result += octave_amplitude * this.simplex.noise3D(octave_frequency * coords[0], octave_frequency * coords[1], octave_frequency * coords[2]);
-            break;
-          case 4:
-            result += octave_amplitude * this.simplex.noise4D(octave_frequency * coords[0], octave_frequency * coords[1], octave_frequency * coords[2], octave_frequency * coords[3]);
-            break;
-        }
-      } else {
-          result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords, 0);
-      }
-      octave_amplitude *= gain;
-      octave_frequency *= lacunarity;
-    }
-    return result;
-  }
-
-  this.api = [
-    [Math.PI, ["PI"]],
-    [Math.PI*2, ["TAU", "TWO_PI"]],
-    [Math.PI/2, ["HPI", "HALF_PI"]],
-    [Math.PI/4, ["QPI", "QUARTER_PI"]],
-    [Math.pow, ["pow"]],
-    [Math.sqrt, ["sqrt"]],
-    [Math.abs, ["abs"]],
-    [Math.ceil, ["ceil"]],
-    [Math.floor, ["flr", "floor"]],
-    [Math.sign, ["sgn", "sign"]],
-    [Math.sin, ["sin"]],
-    [Math.cos, ["cos"]],
-    [Math.tan, ["tan"]],
-    [Math.asin, ["asin"]],
-    [Math.acos, ["acos"]],
-    [Math.atan, ["atan"]],
-    [Math.atan2, ["atan2"]],
-    [Math.min, ["min"]],
-    [Math.max, ["max"]],
-    [Math.random, ["rnd", "random"]],
-    [this.seed.bind(this), ["seed", "srnd", "seedRandom"]],
-    [this.noise.bind(this), ["nse", "noise"]],
-    [this.plotarea.width, ["W", "WIDTH"]],
-    [this.plotarea.height, ["H", "HEIGHT"]],
-    [this.plotarea.lineTo.bind(this.plotarea), ["L2", "lineTo"]],
-    [this.plotarea.moveTo.bind(this.plotarea), ["M2", "moveTo"]],
-    [(x) => Math.pow(x,2), ["sqr"]],
-    [(x) => Math.pow(x,3), ["cub"]],
-    [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
-    [(low,x,high) => Math.max(Math.min(x,high),low), ["mid"]]
-  ]
-
-  this.run = function(txt) {
-    let functionBody = [
-    "'use strict'",
-    ""
-    ].join("\n")
-    functionBody += txt
-    const flatApi = {}
-    for (const parameterList of this.api) {
-      for (const alias of parameterList[1]) {
-        flatApi[alias] = parameterList[0]
-      }
-    }
-    const drawFunction = new Function(...Object.keys(flatApi),functionBody)
-    this.plotarea.reset()
-    drawFunction(...Object.values(flatApi))
-  }
+  this.run = (txt) => this.api.run(txt)
 }
