@@ -151,6 +151,7 @@ function Client() {
       }
     }
     const drawFunction = new Function(...Object.keys(flatApi),functionBody)
+    this.plotarea.reset()
     drawFunction(...Object.values(flatApi))
   }
 }

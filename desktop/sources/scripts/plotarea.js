@@ -14,7 +14,6 @@ function PlotArea(client) {
   this.needsNewPath = true;
 
   this.install = function(host) {
-    // this.el.appendChild(this._paper)
     host.appendChild(this.el)
   }
 
@@ -36,5 +35,14 @@ function PlotArea(client) {
 
   this.moveTo = function(x,y) {
     this.moveLastCoords(x, y)
+  }
+
+  this.clear = function() {
+    this.context.clearRect(0, 0, this.width, this.height)
+  }
+
+  this.reset = function() {
+    this.clear()
+    this.moveLastCoords(0, 0)
   }
 }
