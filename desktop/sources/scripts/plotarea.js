@@ -13,6 +13,7 @@ function PlotArea(client) {
 
   this.install = function(host) {
     host.appendChild(this.el)
+    window.addEventListener('resize', (e) => { this.resize() }, false)
   }
 
   this.start = function() {
