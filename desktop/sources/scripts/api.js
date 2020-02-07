@@ -7,32 +7,32 @@ function Api(client) {
   }
 
   this.noise = (coords, frequency = 1, amplitude = 1, octaves = 1, lacunarity = 2, gain = 0.5) => {
-    var octave_amplitude = amplitude;
-    var octave_frequency = frequency;
-    var result = 0;
+    var octave_amplitude = amplitude
+    var octave_frequency = frequency
+    var result = 0
     for (var i = 0; i < octaves; i++) {
       if (Array.isArray(coords)) {
         switch (coords.length) {
           case 1:
-            result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords[0], 0);
-            break;
+            result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords[0], 0)
+            break
           case 2:
-            result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords[0], octave_frequency * coords[1]);
-            break;
+            result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords[0], octave_frequency * coords[1])
+            break
           case 3:
-            result += octave_amplitude * this.simplex.noise3D(octave_frequency * coords[0], octave_frequency * coords[1], octave_frequency * coords[2]);
-            break;
+            result += octave_amplitude * this.simplex.noise3D(octave_frequency * coords[0], octave_frequency * coords[1], octave_frequency * coords[2])
+            break
           case 4:
-            result += octave_amplitude * this.simplex.noise4D(octave_frequency * coords[0], octave_frequency * coords[1], octave_frequency * coords[2], octave_frequency * coords[3]);
-            break;
+            result += octave_amplitude * this.simplex.noise4D(octave_frequency * coords[0], octave_frequency * coords[1], octave_frequency * coords[2], octave_frequency * coords[3])
+            break
         }
       } else {
-          result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords, 0);
+          result += octave_amplitude * this.simplex.noise2D(octave_frequency * coords, 0)
       }
-      octave_amplitude *= gain;
-      octave_frequency *= lacunarity;
+      octave_amplitude *= gain
+      octave_frequency *= lacunarity
     }
-    return result;
+    return result
   }
 
   this.random = (param1, param2) => {

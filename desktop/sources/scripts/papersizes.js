@@ -76,7 +76,7 @@ function PaperSizes () {
     [ 'C10', 28, 40, 'International', 'C Series' ],
     [ 'C11', 22, 32, 'International', 'C Series' ],
     [ 'C12', 16, 22, 'International', 'C Series' ]
-  ];
+  ]
 
   this.buildMenuTemplate = function(onClick) {
     const menuDict = {}

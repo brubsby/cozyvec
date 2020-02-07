@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, Menu} = require('electron')
 const path = require('path')
-const SVG = require("@svgdotjs/svg.js");
+const SVG = require("@svgdotjs/svg.js")
 const fengari = require("@mstrodl/fengari")
 
 // Keep a global reference of the window object, if you don't, the window will
