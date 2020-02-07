@@ -79,7 +79,7 @@ function Api(client) {
     [client.plotarea.lineTo.bind(client.plotarea), ["l2", "lineTo"]],
     [client.plotarea.moveTo.bind(client.plotarea), ["m2", "moveTo"]],
     [(x) => Math.pow(x,2), ["sqr"]],
-    [(x) => Math.pow(x,3), ["cub"]],
+    [(x) => Math.pow(x,3), ["cub", "cube"]],
     [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
     [(low,x,high) => Math.max(Math.min(x,high),low), ["mid"]]
   ]
@@ -98,6 +98,7 @@ function Api(client) {
     }
     const drawFunction = new Function(...Object.keys(flatApi),txt)
     client.plotarea.reset()
+    this.seed()
     drawFunction(...Object.values(flatApi))
   }
 }
