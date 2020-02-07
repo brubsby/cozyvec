@@ -51,7 +51,7 @@ function Api(client) {
     }
   }
 
-  this.builtins = [
+  this.builtins = () => [
     [Math.PI, ["PI"]],
     [Math.PI*2, ["TAU", "TWO_PI"]],
     [Math.PI/2, ["HPI", "HALF_PI"]],
@@ -91,7 +91,7 @@ function Api(client) {
     // ].join("\n")
     // functionBody += txt
     const flatApi = {}
-    for (const parameterList of this.builtins) {
+    for (const parameterList of this.builtins()) {
       for (const alias of parameterList[1]) {
         flatApi[alias] = parameterList[0]
       }
