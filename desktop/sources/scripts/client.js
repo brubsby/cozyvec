@@ -1,4 +1,4 @@
-'use strict'
+ 'use strict'
 
 function Client() {
   this.el = document.createElement('div')
@@ -35,7 +35,14 @@ function Client() {
 
     this.acels.set('Project', 'Run', 'CmdOrCtrl+R', () => { this.codearea.run() })
 
-    this.acels.addTemplate(this.papersizes.buildMenuTemplate((dims) => {}))
+    this.acels.addTemplate(this.papersizes.buildMenuTemplate((dims) => this.plotarea.resize(dims)))
+    this.acels.addTemplate({
+      label: 'Orientation',
+      submenu: [
+        {label: 'Portrait', click: () => this.plotarea.orientation(true)},
+        {label: 'Landscape', click: () => this.plotarea.orientation(false)}
+      ]
+    })
 
     this.acels.install(window)
     this.acels.pipe(this)
