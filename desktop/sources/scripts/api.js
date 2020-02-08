@@ -91,6 +91,7 @@ function Api(client) {
     // ""
     // ].join("\n")
     // txt = usestrict + txt
+    txt += "\nmoveTo(0,0)"
     const flatApi = {}
     for (const parameterList of this.builtins()) {
       for (const alias of parameterList[1]) {

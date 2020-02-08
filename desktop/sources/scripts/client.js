@@ -34,6 +34,7 @@ function Client() {
     this.acels.add('Edit', 'selectAll')
 
     this.acels.set('Project', 'Run', 'CmdOrCtrl+R', () => { this.codearea.run() })
+    this.acels.set('Project', 'Export SVG', 'CmdOrCtrl+E', () => { this.plotarea.exportSVG() })
 
     this.acels.addTemplate(this.papersizes.buildMenuTemplate((dims) => this.plotarea.resize(dims)))
     this.acels.addTemplate({

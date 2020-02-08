@@ -8,6 +8,7 @@ function PlotArea(client) {
   this.pixelRatio = window.devicePixelRatio
   this.context = this.el.getContext('2d')
   this.polylines = []
+  this.currentPolyline = []
 
   this.lastX = 0
   this.lastY = 0
@@ -66,12 +67,15 @@ function PlotArea(client) {
   this.lineTo = function(x,y) {
     this.context.beginPath()
     this.context.moveTo(this.lastX, this.lastY)
-    this.context.lineTo(x,y)
-    this.moveLastCoords(x,y)
+    this.context.lineTo(x, y)
     this.context.stroke()
+    this.currentPolyline.push([x, y])
+    this.moveLastCoords(x, y)
   }
 
   this.moveTo = function(x,y) {
+    if (this.currentPolyline.length > 1) this.polylines.push(this.currentPolyline)
+    this.currentPolyline = [[x, y]]
     this.lastMoveToX = x
     this.lastMoveToY = y
     this.moveLastCoords(x, y)
@@ -83,10 +87,15 @@ function PlotArea(client) {
 
   this.clear = function() {
     this.context.clearRect(0, 0, this.width, this.height)
+    this.polylines = []
   }
 
   this.reset = function() {
     this.clear()
     this.moveLastCoords(0, 0)
+  }
+
+  this.exportSVG = function() {
+
   }
 }
