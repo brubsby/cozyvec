@@ -77,7 +77,7 @@ function PlotArea(client) {
     this.moveLastCoords(x, y)
   }
 
-  this.close = function() {
+  this.closePath = function() {
     this.lineTo(this.lastMoveToX, this.lastMoveToY)
   }
 

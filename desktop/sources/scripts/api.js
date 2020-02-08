@@ -78,7 +78,7 @@ function Api(client) {
     [client.plotarea.height, ["H", "HEIGHT"]],
     [client.plotarea.lineTo.bind(client.plotarea), ["l2", "lineTo"]],
     [client.plotarea.moveTo.bind(client.plotarea), ["m2", "moveTo"]],
-    [client.plotarea.close.bind(client.plotarea), ["cls", "close"]],
+    [client.plotarea.closePath.bind(client.plotarea), ["clsp", "closePath"]],
     [(x) => Math.pow(x,2), ["sqr"]],
     [(x) => Math.pow(x,3), ["cub", "cube"]],
     [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
