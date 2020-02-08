@@ -7,9 +7,12 @@ function PlotArea(client) {
   this.isPortrait = true
   this.pixelRatio = window.devicePixelRatio
   this.context = this.el.getContext('2d')
+  this.polylines = []
 
   this.lastX = 0
   this.lastY = 0
+  this.lastMoveToX = 0
+  this.lastMoveToY = 0
 
   this.install = function(host) {
     host.appendChild(this.el)
@@ -69,7 +72,13 @@ function PlotArea(client) {
   }
 
   this.moveTo = function(x,y) {
+    this.lastMoveToX = x
+    this.lastMoveToY = y
     this.moveLastCoords(x, y)
+  }
+
+  this.close = function() {
+    this.lineTo(this.lastMoveToX, this.lastMoveToY)
   }
 
   this.clear = function() {

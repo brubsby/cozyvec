@@ -78,6 +78,7 @@ function Api(client) {
     [client.plotarea.height, ["H", "HEIGHT"]],
     [client.plotarea.lineTo.bind(client.plotarea), ["l2", "lineTo"]],
     [client.plotarea.moveTo.bind(client.plotarea), ["m2", "moveTo"]],
+    [client.plotarea.close.bind(client.plotarea), ["cls", "close"]],
     [(x) => Math.pow(x,2), ["sqr"]],
     [(x) => Math.pow(x,3), ["cub", "cube"]],
     [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
@@ -85,11 +86,11 @@ function Api(client) {
   ]
 
   this.run = function(txt) {
-    // let functionBody = [
+    // let usestrict = [
     // "'use strict'",
     // ""
     // ].join("\n")
-    // functionBody += txt
+    // txt = usestrict + txt
     const flatApi = {}
     for (const parameterList of this.builtins()) {
       for (const alias of parameterList[1]) {
@@ -98,7 +99,6 @@ function Api(client) {
     }
     const drawFunction = new Function(...Object.keys(flatApi),txt)
     client.plotarea.reset()
-    this.seed()
     drawFunction(...Object.values(flatApi))
   }
 }
