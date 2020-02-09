@@ -21,7 +21,6 @@ Cross-platform build downloads to come soon
 
 # Library
 <!-- To display the list of operators inside of cozyvec, use `CmdOrCtrl+G`. -->
-## Constants
 - `W|WIDTH` canvas width
 - `H|HEIGHT` canvas width
 - `PI` π
@@ -29,14 +28,10 @@ Cross-platform build downloads to come soon
 - `HPI|HALF_PI` π/2
 - `QPI|QUARTER_PI` π/4
 
-## Functions
-
-### Drawing
 - `l2|lineTo(x,y)` draw line from last point
 - `m2|moveTo(x,y)` move to point
 - `clsp|closePath()` draw line to last move to point
 
-### Math
 - `pow(a,b)` exponentiation
 - `sqrt(a)` square root
 - `sqr|square(a)` square number
@@ -57,7 +52,6 @@ Cross-platform build downloads to come soon
 - `mid(a,b,c)` clamp b to [a,c]
 - `dst|distance(x1,y1,x2,y2)` distance between points
 
-### Random
 - `rnd|random()` random \[0-1)
 - `rnd|random(a)` random \[0-a)
 - `rnd|random(a,b)` random \[a-b)
