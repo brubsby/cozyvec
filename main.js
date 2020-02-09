@@ -24,7 +24,7 @@ app.on('ready', () => {
 
  })
 
- app.win.loadFile('index.html')
+ app.win.loadURL(`file://${__dirname}/sources/index.html`)
  //app.inspect()
 
  app.win.on('closed', function () {
