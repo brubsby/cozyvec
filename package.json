@@ -1,7 +1,7 @@
 {
   "name": "cozyvec",
   "version": "0.1.0",
-  "description": "app for generating svg files with javascript",
+  "description": "Cozy Plotter Art Terminal",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
