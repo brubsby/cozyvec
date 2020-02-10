@@ -19,24 +19,17 @@ npm start
 
 Cross-platform build downloads to come soon
 
-# Library
-<!-- To display the list of operators inside of cozyvec, use `CmdOrCtrl+G`. -->
-## Constants
+## Library
+
+- `l2|lineTo(x,y)` draw line from last point
+- `m2|moveTo(x,y)` move to point
+- `clsp|closePath()` draw line to last move to point
 - `W|WIDTH` canvas width
 - `H|HEIGHT` canvas width
 - `PI` π
 - `TAU|TWO_PI` 2*π
 - `HPI|HALF_PI` π/2
 - `QPI|QUARTER_PI` π/4
-
-## Functions
-
-### Drawing
-- `l2|lineTo(x,y)` draw line from last point
-- `m2|moveTo(x,y)` move to point
-- `clsp|closePath()` draw line to last move to point
-
-### Math
 - `pow(a,b)` exponentiation
 - `sqrt(a)` square root
 - `sqr|square(a)` square number
@@ -56,8 +49,6 @@ Cross-platform build downloads to come soon
 - `max(...a)` maximum
 - `mid(a,b,c)` clamp b to [a,c]
 - `dst|distance(x1,y1,x2,y2)` distance between points
-
-### Random
 - `rnd|random()` random \[0-1)
 - `rnd|random(a)` random \[0-a)
 - `rnd|random(a,b)` random \[a-b)
@@ -66,7 +57,3 @@ Cross-platform build downloads to come soon
 - `nse|noise(pos)` [simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) (pos can be a number or 1-4 numbers in a list)
 - `nse|noise(pos,freq,amp)` simplex noise
 - `nse|noise(pos,freq,amp,octaves,lacunarity,gain)` fractal simplex noise
-
-
-
-
