@@ -95,7 +95,46 @@ function PlotArea(client) {
     this.moveLastCoords(0, 0)
   }
 
-  this.exportSVG = function() {
-    //TODO
+  this.getSvg = function() {
+    return this.polylinesToSVG(this.polylines,
+      {
+        paperDimensions: [this.paperWidth, this.paperHeight],
+        drawDimensions: [this.width, this.height]
+      })
+  }
+
+  this.polylinesToSVG = function(polylines, opt = {}) {
+    const DEFAULT_SVG_LINE_WIDTH = 0.3
+    const paperDimensions = opt.paperDimensions
+    const drawDimensions = opt.drawDimensions
+    if (!paperDimensions || !drawDimensions) throw new TypeError('must specify dimensions currently')
+    const decimalPlaces = 5
+
+    let commands = []
+    polylines.forEach(line => {
+      line.forEach((point, j) => {
+        const type = (j === 0) ? 'M' : 'L'
+        const x = (point[0]).toFixed(decimalPlaces)
+        const y = (point[1]).toFixed(decimalPlaces)
+        commands.push(`${type} ${x} ${y}`)
+      });
+    });
+
+    const svgPath = commands.join(' ')
+    const viewWidth = (drawDimensions[0]).toFixed(decimalPlaces)
+    const viewHeight = (drawDimensions[1]).toFixed(decimalPlaces)
+    const fillStyle = opt.fillStyle || 'none'
+    const strokeStyle = opt.strokeStyle || 'black'
+    const lineWidth = opt.lineWidth !== undefined ? opt.lineWidth : DEFAULT_SVG_LINE_WIDTH
+
+    return `<?xml version="1.0" standalone="no"?>
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+      "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+    <svg width="${paperDimensions[0]}mm" height="${paperDimensions[1]}mm"
+         xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${viewWidth} ${viewHeight}">
+     <g>
+       <path d="${svgPath}" fill="${fillStyle}" stroke="${strokeStyle}" stroke-width="${lineWidth}mm" />
+     </g>
+  </svg>`
   }
 }
