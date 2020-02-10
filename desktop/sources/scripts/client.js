@@ -7,6 +7,7 @@ function Client() {
   this.acels = new Acels(this)
   this.codearea = new CodeArea(this)
   this.plotarea = new PlotArea(this)
+  this.source = new Source(this)
   this.api = new Api(this)
   this.papersizes = new PaperSizes()
 
@@ -21,10 +22,10 @@ function Client() {
     this.el.appendChild(this._wrapper)
     host.appendChild(this.el)
 
-    // this.acels.set('File', 'New', 'CmdOrCtrl+N', () => { this.source.new(); this.surface.clear(); this.commander.clear() })
-    // this.acels.set('File', 'Save', 'CmdOrCtrl+S', () => { this.source.download('ronin', 'lisp', this.commander._input.value, 'text/plain') })
-    // this.acels.set('File', 'Export Image', 'CmdOrCtrl+E', () => { this.source.download('ronin', 'png', this.surface.el.toDataURL('image/png', 1.0), 'image/png') })
-    // this.acels.set('File', 'Open', 'CmdOrCtrl+O', () => { this.source.open('lisp', this.whenOpen) })
+    this.acels.set('File', 'New', 'CmdOrCtrl+N', () => { this.source.new(); this.plotarea.reset(); this.codearea.clear() })
+    this.acels.set('File', 'Save', 'CmdOrCtrl+S', () => { this.source.write('cozyvec', 'cv', this.codearea._input.value, 'text/plain') })
+    this.acels.set('File', 'Export Image', 'CmdOrCtrl+E', () => { this.source.write('cozyvec', 'png', this.plotarea.el.toDataURL('image/png', 1.0), 'image/png') })
+    this.acels.set('File', 'Open', 'CmdOrCtrl+O', () => { this.source.open('cv', this.whenOpen) })
 
     this.acels.add('Edit', 'undo')
     this.acels.add('Edit', 'redo')
@@ -34,7 +35,6 @@ function Client() {
     this.acels.add('Edit', 'selectAll')
 
     this.acels.set('Project', 'Run', 'CmdOrCtrl+R', () => { this.codearea.run() })
-    this.acels.set('Project', 'Export SVG', 'CmdOrCtrl+E', () => { this.plotarea.exportSVG() })
 
     this.acels.addTemplate(this.papersizes.buildMenuTemplate((dims) => this.plotarea.resize(dims)))
     this.acels.addTemplate({
@@ -52,7 +52,11 @@ function Client() {
   this.start = function() {
     this.codearea.start()
     this.plotarea.start()
-    // this.loop()
+  }
+
+  this.whenOpen = (file, res) => {
+    console.log(file, res)
+    this.codearea.load(res)
   }
 
   this.bind = (event, fn) => {

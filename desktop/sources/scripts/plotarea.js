@@ -96,6 +96,6 @@ function PlotArea(client) {
   }
 
   this.exportSVG = function() {
-
+    //TODO
   }
 }

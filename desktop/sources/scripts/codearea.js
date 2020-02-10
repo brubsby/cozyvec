@@ -17,4 +17,12 @@ function CodeArea(client) {
   this.run = function(txt = this._input.value) {
     client.run(txt)
   }
+
+  this.load = function(txt) {
+    this._input.value = txt
+  }
+
+  this.clear = function() {
+    this.load('')
+  }
 }
