@@ -1,5 +1,5 @@
 function Api(client) {
-  this.simplex = new SimplexNoise()
+  this.simplex = new SimplexNoise(Math.random())
 
   this.seed = (seed = 0) => {
     Math.seedrandom(seed)
