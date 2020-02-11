@@ -13,19 +13,19 @@ function PaperSizes () {
     [ 'Poster', 460, 610, 'North American', 'Common' ],
     [ 'Poster-Large', 610, 910, 'North American', 'Common' ],
     [ 'Business-Card', 50.8, 88.9, 'North American', 'Common' ],
-    [ 'ANSI-a', 216, 279, 'North American', 'Uncommon' ],
-    [ 'ANSI-b', 279, 432, 'North American', 'Uncommon' ],
-    [ 'ANSI-c', 432, 559, 'North American', 'Uncommon' ],
-    [ 'ANSI-d', 559, 864, 'North American', 'Uncommon' ],
-    [ 'ANSI-e', 864, 1118, 'North American', 'Uncommon' ],
-    [ 'Arch-a', 229, 305, 'North American', 'Uncommon' ],
-    [ 'Arch-b', 305, 457, 'North American', 'Uncommon' ],
-    [ 'Arch-c', 457, 610, 'North American', 'Uncommon' ],
-    [ 'Arch-d', 610, 914, 'North American', 'Uncommon' ],
-    [ 'Arch-e', 914, 1219, 'North American', 'Uncommon' ],
-    [ 'Arch-e1', 762, 1067, 'North American', 'Uncommon' ],
-    [ 'Arch-e2', 660, 965, 'North American', 'Uncommon' ],
-    [ 'Arch-e3', 686, 991, 'North American', 'Uncommon' ],
+    [ 'ANSI-A', 216, 279, 'North American', 'Uncommon' ],
+    [ 'ANSI-B', 279, 432, 'North American', 'Uncommon' ],
+    [ 'ANSI-C', 432, 559, 'North American', 'Uncommon' ],
+    [ 'ANSI-D', 559, 864, 'North American', 'Uncommon' ],
+    [ 'ANSI-E', 864, 1118, 'North American', 'Uncommon' ],
+    [ 'Arch-A', 229, 305, 'North American', 'Uncommon' ],
+    [ 'Arch-B', 305, 457, 'North American', 'Uncommon' ],
+    [ 'Arch-C', 457, 610, 'North American', 'Uncommon' ],
+    [ 'Arch-D', 610, 914, 'North American', 'Uncommon' ],
+    [ 'Arch-E', 914, 1219, 'North American', 'Uncommon' ],
+    [ 'Arch-E1', 762, 1067, 'North American', 'Uncommon' ],
+    [ 'Arch-E2', 660, 965, 'North American', 'Uncommon' ],
+    [ 'Arch-E3', 686, 991, 'North American', 'Uncommon' ],
     [ '2R', 64, 89, 'Photo Print' ],
     [ '3R', 89, 127, 'Photo Print' ],
     [ '4R', 102, 152, 'Photo Print' ],
@@ -116,7 +116,7 @@ function PaperSizes () {
           }
           const subsubmenu = []
           for (const menuitem of menuDict[category][subcategory]) {
-            subsubmenu.push({label: menuitem.name, click: onClick.bind(null, menuitem.dims)})
+            subsubmenu.push({label: menuitem.name, click: onClick.bind(null, menuitem.dims, menuitem.name)})
           }
           subcategoryDict.submenu = subsubmenu
           submenu.push(subcategoryDict)
