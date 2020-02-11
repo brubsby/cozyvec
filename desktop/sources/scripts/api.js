@@ -109,7 +109,7 @@ function Api(client) {
     try {
       drawFunction(...Object.values(flatApi))
     } catch(e) {
-      client.message(e.message + ':' + e.stack.match('(?<=<anonymous>:)\\d+:\\d+'))
+      client.message(`%{e.message} : ${e.stack.match('(?<=<anonymous>:)\\d+:\\d+')}`)
     }
   }
 }
