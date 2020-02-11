@@ -29,6 +29,10 @@ function PlotArea(client) {
     this.resize()
   }
 
+  this.orientationToggle = function() {
+    this.orientation(!this.isPortrait)
+  }
+
   this.resize = function(paperDims = [this.paperWidth, this.paperHeight], isPortrait = this.isPortrait, margin = this.margin) {
     const windowWidth = window.innerWidth
     const windowHeight = window.innerHeight
