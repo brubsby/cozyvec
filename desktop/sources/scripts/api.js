@@ -62,7 +62,12 @@ function Api(client) {
   
   this.paper = (...args) => {
     if (typeof args[0] === 'string' || args[0] instanceof String) {
-      //TODO paper lookup
+      const paper_lookup = client.papersizes.SIZES_DICT[args[0]]
+      if(paper_lookup) {
+        this.customPaper(paper_lookup[0], paper_lookup[1], args[0])
+      } else {
+        throw new TypeError(`"${args[0]}" paper not found.`)
+      }
     } else {
       this.customPaper(...args)
     }
