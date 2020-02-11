@@ -22,7 +22,7 @@ function PlotArea(client) {
   }
 
   this.start = function() {
-    this.resize([ 216, 279 ], true, 30)
+    this.resize([ 216, 279 ], "Letter", true, 30)
   }
 
   this.orientation = function(isPortrait) {
@@ -39,7 +39,7 @@ function PlotArea(client) {
     this.context.lineWidth = width_mm / this.paperHeight * this.height
   }
 
-  this.resize = function(paperDims = [this.paperWidth, this.paperHeight], isPortrait = this.isPortrait, margin = this.margin) {
+  this.resize = function(paperDims = [this.paperWidth, this.paperHeight], name='Custom', isPortrait = this.isPortrait, margin = this.margin) {
     const windowWidth = window.innerWidth
     const windowHeight = window.innerHeight
     const minPaperDim = Math.min(paperDims[0], paperDims[1])
@@ -69,6 +69,7 @@ function PlotArea(client) {
     this.el.style.margin = this.verticalMargin + 'px ' + this.horizontalMargin + 'px'
 
     this.penWidth(this.penWidthMM)
+    this.paperName = name
   }
 
   this.moveLastCoords = function(x,y) {
