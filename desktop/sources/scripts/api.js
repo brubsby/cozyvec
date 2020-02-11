@@ -1,5 +1,5 @@
 function Api(client) {
-  this.simplex = new SimplexNoise(Math.random())
+  this.simplex = new SimplexNoise()
 
   this.seed = (seed = 0) => {
     Math.seedrandom(seed)
@@ -86,12 +86,8 @@ function Api(client) {
   ]
 
   this.run = function(txt) {
-    // let usestrict = [
-    // "'use strict'",
-    // ""
-    // ].join("\n")
-    // txt = usestrict + txt
     txt += "\nmoveTo(0,0)"
+    this.seed((new Date()).getTime())
     const flatApi = {}
     for (const parameterList of this.builtins()) {
       for (const alias of parameterList[1]) {
