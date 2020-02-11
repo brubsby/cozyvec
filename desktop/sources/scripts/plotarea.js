@@ -9,6 +9,7 @@ function PlotArea(client) {
   this.context = this.el.getContext('2d')
   this.polylines = []
   this.currentPolyline = []
+  this.penWidthMM = 0.3
 
   this.lastX = 0
   this.lastY = 0
@@ -31,6 +32,11 @@ function PlotArea(client) {
 
   this.orientationToggle = function() {
     this.orientation(!this.isPortrait)
+  }
+
+  this.penWidth = function(width_mm) {
+    this.penWidthMM = width_mm
+    this.context.lineWidth = width_mm / this.paperHeight * this.height
   }
 
   this.resize = function(paperDims = [this.paperWidth, this.paperHeight], isPortrait = this.isPortrait, margin = this.margin) {
@@ -61,6 +67,8 @@ function PlotArea(client) {
     this.el.style.width = this.width + 'px'
     this.el.style.height = this.height + 'px'
     this.el.style.margin = this.verticalMargin + 'px ' + this.horizontalMargin + 'px'
+
+    this.penWidth(this.penWidthMM)
   }
 
   this.moveLastCoords = function(x,y) {
