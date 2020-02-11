@@ -51,6 +51,15 @@ function Api(client) {
     }
   }
 
+  this.mid = (low,x,high) => {
+    return Math.max(Math.min(x,high),low)
+  }
+
+  this.smooth_mid = (low,x,high) => {
+    const v = this.mid(0,(x-low)/(high-low),1)
+    return v * v * v * ( v * ( v * 6 - 15 ) + 10 ) * (high - low) + low
+  }
+
   this.builtins = () => [
     [Math.PI, ["PI"]],
     [Math.PI*2, ["TAU", "TWO_PI"]],
@@ -82,7 +91,8 @@ function Api(client) {
     [(x) => Math.pow(x,2), ["sqr", "square"]],
     [(x) => Math.pow(x,3), ["cub", "cube"]],
     [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
-    [(low,x,high) => Math.max(Math.min(x,high),low), ["mid"]]
+    [this.mid, ["mid"]],
+    [this.smooth_mid, ["smid"]]
   ]
 
   this.run = function(txt) {

@@ -48,6 +48,7 @@ Cross-platform build downloads to come soon
 - `min(...a)` minimum
 - `max(...a)` maximum
 - `mid(a,b,c)` clamp b to [a,c]
+- `smid(a,b,c)` clamp b to [a,c] with [smoothing](https://en.wikipedia.org/wiki/Smoothstep)
 - `dst|distance(x1,y1,x2,y2)` distance between points
 - `rnd|random()` random \[0-1)
 - `rnd|random(a)` random \[0-a)
