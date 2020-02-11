@@ -109,7 +109,11 @@ function Api(client) {
       const drawFunction = new Function(...Object.keys(flatApi),txt)
       drawFunction(...Object.values(flatApi))
     } catch(e) {
-      const lineInfo = e.stack.match('(?<=<anonymous>:)\\d+:\\d+')
+      var lineInfo = e.stack.match('(?<=<anonymous>:)\\d+:\\d+')
+      if (lineInfo) {
+        const lineInfoSplit = lineInfo[0].split(':')
+        lineInfo = `${lineInfoSplit[0]-2}:${lineInfoSplit[1]}`
+      }
       client.message(e.message + (lineInfo ? ` : ${lineInfo}` : ''))
     }
   }
