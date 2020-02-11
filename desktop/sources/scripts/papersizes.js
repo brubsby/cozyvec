@@ -2,7 +2,7 @@
 
 function PaperSizes () {
 
-  const SIZES = [
+  this.SIZES = [
     [ 'Letter', 216, 279, 'North American', 'Common' ],
     [ 'Half-Letter', 140, 216, 'North American', 'Common' ],
     [ 'Legal', 216, 356, 'North American', 'Common' ],
@@ -77,10 +77,18 @@ function PaperSizes () {
     [ 'C11', 22, 32, 'International', 'C Series' ],
     [ 'C12', 16, 22, 'International', 'C Series' ]
   ]
+  
+  this.asDict = function () {
+    const returnDict = {}
+    for (const paper of this.SIZES) {
+      returnDict[paper[0]] = paper.slice(1)
+    }
+    return returnDict
+  }
 
   this.buildMenuTemplate = function(onClick) {
     const menuDict = {}
-    for (const paper of SIZES) {
+    for (const paper of this.SIZES) {
       const category = paper[3]
       const subcategory = paper[4]
       if (paper[4]) {
