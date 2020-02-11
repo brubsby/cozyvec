@@ -37,7 +37,7 @@ function Client() {
 
     this.acels.set('Project', 'Run', 'CmdOrCtrl+R', () => { this.codearea.run() })
 
-    this.acels.addTemplate(this.papersizes.buildMenuTemplate((dims) => this.plotarea.resize(dims)))
+    this.acels.addTemplate(this.papersizes.buildMenuTemplate((dims, name) => this.plotarea.resize(dims, name)))
 
     this.acels.set('Orientation', 'Toggle Orientation', 'CmdOrCtrl+P', () => this.plotarea.orientationToggle())
 
