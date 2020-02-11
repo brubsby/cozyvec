@@ -8,6 +8,10 @@ function CodeArea(client) {
   this.install = function(host) {
     this.el.appendChild(this._input)
     host.appendChild(this.el)
+    this._input.setAttribute('autocomplete', 'off')
+    this._input.setAttribute('autocorrect', 'off')
+    this._input.setAttribute('autocapitalize', 'off')
+    this._input.setAttribute('spellcheck', 'false')
   }
 
   this.start = function() {
