@@ -39,7 +39,7 @@ function PlotArea(client) {
     this.context.lineWidth = width_mm / this.paperHeight * this.height
   }
 
-  this.resize = function(paperDims = [this.paperWidth, this.paperHeight], name='Custom', isPortrait = this.isPortrait, margin = this.margin) {
+  this.resize = function(paperDims = [this.paperWidth, this.paperHeight], name=this.paperName, isPortrait = this.isPortrait, margin = this.margin) {
     const windowWidth = window.innerWidth
     const windowHeight = window.innerHeight
     const minPaperDim = Math.min(paperDims[0], paperDims[1])
@@ -70,6 +70,8 @@ function PlotArea(client) {
 
     this.penWidth(this.penWidthMM)
     this.paperName = name
+    
+    client.codearea.setStatus()
   }
 
   this.moveLastCoords = function(x,y) {
