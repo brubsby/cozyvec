@@ -59,6 +59,19 @@ function Api(client) {
     const v = this.mid(0,(x-low)/(high-low),1)
     return v * v * v * ( v * ( v * 6 - 15 ) + 10 ) * (high - low) + low
   }
+  
+  this.paper = (...args) => {
+    if (typeof args[0] === 'string' || args[0] instanceof String) {
+      //TODO paper lookup
+    } else {
+      this.customPaper(...args)
+    }
+  }
+  
+  this.customPaper = (width,height,name,isPortrait) => {
+    name = name || 'Custom'
+    client.plotarea.resize([width,height],name,isPortrait)
+  }
 
   this.builtins = () => [
     [Math.PI, ["PI"]],
@@ -92,7 +105,8 @@ function Api(client) {
     [(x) => Math.pow(x,3), ["cub", "cube"]],
     [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
     [this.mid, ["mid"]],
-    [this.smooth_mid, ["smid"]]
+    [this.smooth_mid, ["smid"]],
+    [this.paper, ["ppr", "paper"]]
   ]
 
   this.run = function(txt) {
