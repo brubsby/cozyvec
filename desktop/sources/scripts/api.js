@@ -106,6 +106,10 @@ function Api(client) {
     }
     const drawFunction = new Function(...Object.keys(flatApi),txt)
     client.plotarea.reset()
-    drawFunction(...Object.values(flatApi))
+    try {
+      drawFunction(...Object.values(flatApi))
+    } catch(e) {
+      client.message(e.message + ':' + e.stack.match('(?<=<anonymous>:)\\d+:\\d+'))
+    }
   }
 }

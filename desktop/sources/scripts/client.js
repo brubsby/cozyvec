@@ -77,5 +77,12 @@ function Client() {
     }
   }
 
-  this.run = (txt) => this.api.run(txt)
+  this.message = (txt) => {
+    this.codearea.setStatus(txt)
+  }
+
+  this.run = (txt) => {
+    this.codearea.setStatus('')
+    this.api.run(txt)
+  }
 }

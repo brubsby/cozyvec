@@ -1,7 +1,8 @@
-body {margin:0; background-color: black}
+body {margin:0; background-color:black; font-family:'dos_vga_regular',courier,monospace; overflow:hidden;}
 
 #cozyvec {height:calc(100vh); width:calc(100vw); padding:0; overflow:hidden;}
 #cozyvec #wrapper {overflow:hidden; position:relative;}
 #cozyvec #wrapper #codearea {position:relative; width:calc(50vw - 30px); height:calc(100vh - 60px); padding:30px; padding-right:0;}
-#cozyvec #wrapper #codearea textarea {background:none; border:none; color:white; height:100%; width:100%; font-family:'dos_vga_regular',courier,monospace; resize:none; outline:none; font-size:16px; line-height:15px; padding:0}
+#cozyvec #wrapper #codearea textarea {background:none; border:none; color:white; height:calc(100vh - 105px); width:100%; resize:none; outline:none; font-size:16px; line-height:15px; padding:0}
+#cozyvec #wrapper #codearea #status {color:#777777; position:absolute; bottom:30px; line-height:15px; height:30px; overflow:hidden; width:calc(100% - 30px);}
 #cozyvec #wrapper #plotarea {background-color:white; position:absolute; left:calc(50vw); top:0px; -webkit-user-select:none; -webkit-app-region:no-drag; width:calc(50vw - 60px); height:calc(100vh - 60px); margin:30px; box-shadow: rgba(255, 255, 255, 0.5) 3px 3px 20px 0px;}
