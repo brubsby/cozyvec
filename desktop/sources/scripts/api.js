@@ -104,9 +104,9 @@ function Api(client) {
         flatApi[alias] = parameterList[0]
       }
     }
-    const drawFunction = new Function(...Object.keys(flatApi),txt)
     client.plotarea.reset()
     try {
+      const drawFunction = new Function(...Object.keys(flatApi),txt)
       drawFunction(...Object.values(flatApi))
     } catch(e) {
       client.message(`${e.message} : ${e.stack.match('(?<=<anonymous>:)\\d+:\\d+')}`)
