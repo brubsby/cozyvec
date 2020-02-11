@@ -38,7 +38,7 @@ function CodeArea(client) {
 
   this.setStatus = function(msg) {
     if (msg !== undefined && msg !== this._docs.textContent) {
-      this._log.textContent = msg || '&nbsp;'
+      this._log.textContent = msg || '\u00a0'
     }
     const paper_info = `${client.plotarea.paperName} Paper : ${client.plotarea.paperWidth} x ${client.plotarea.paperHeight} mm : ${client.plotarea.isPortrait ? "Portrait" : "Landscape"}`
     if (paper_info !== this._docs.textContent) {
