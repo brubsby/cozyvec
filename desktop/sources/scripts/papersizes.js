@@ -85,6 +85,8 @@ function PaperSizes () {
     }
     return returnDict
   }
+  
+  this.SIZES_DICT = this.asDict()
 
   this.buildMenuTemplate = function(onClick) {
     const menuDict = {}
