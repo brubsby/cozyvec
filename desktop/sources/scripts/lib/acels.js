@@ -78,7 +78,7 @@ function Acels (client) {
     for (const cat in cats) {
       text += `\n### ${cat}\n\n`
       for (const item of cats[cat]) {
-        text += item.accelerator ? `- \`${item.accelerator}\`: ${item.name}\n` : ''
+        text += item.accelerator ? `- \`${item.accelerator.replace('`', 'tilde')}\`: ${item.name}\n` : ''
       }
     }
     return text.trim()
@@ -89,7 +89,7 @@ function Acels (client) {
     let text = ''
     for (const cat in cats) {
       for (const item of cats[cat]) {
-        text += item.accelerator ? `${cat}: ${item.name} | ${item.accelerator}\n` : ''
+        text += item.accelerator ? `${item.name.padEnd(25, '.')} ${item.accelerator}\n` : ''
       }
     }
     return text.trim()
@@ -108,7 +108,7 @@ function Acels (client) {
         { label: 'Fullscreen', accelerator: 'CmdOrCtrl+Enter', click: () => { app.toggleFullscreen() } },
         { label: 'Hide', accelerator: 'CmdOrCtrl+H', click: () => { app.toggleVisible() } },
         { label: 'Toggle Menubar', accelerator: 'Alt+H', click: () => { app.toggleMenubar() } },
-        { label: 'Inspect', accelerator: 'CmdOrCtrl+.', click: () => { app.inspect() } },
+        { label: 'Inspect', accelerator: 'CmdOrCtrl+Tab', click: () => { app.inspect() } },
         { label: 'Refresh', accelerator: 'F5', click: () => { app.reload() } },
         { role: 'quit' }
       ]
