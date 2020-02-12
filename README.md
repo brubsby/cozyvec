@@ -27,8 +27,9 @@ Cross-platform build downloads to come soon
 - `ppr|paper(name[,orientation])` change paper to size in library
 - `ppr|paper(w,h[,name[,orientation]])` custom paper in mm
 - `pen(w)` pen width in mm
+- `mbox|marginBox([a[,b[,c[,d]]]])` create bounding box with margins [x1,y1,x2,y2] default 40 mm, partial arguments follow css margin conventions
 - `W|WIDTH` canvas width
-- `H|HEIGHT` canvas width
+- `H|HEIGHT` canvas height
 - `PI` π
 - `TAU|TWO_PI` 2*π
 - `HPI|HALF_PI` π/2
@@ -51,7 +52,7 @@ Cross-platform build downloads to come soon
 - `min(...a)` minimum
 - `max(...a)` maximum
 - `mid(a,b,c)` clamp b to [a,c]
-- `smid(a,b,c)` clamp b to [a,c] with [smoothing](https://en.wikipedia.org/wiki/Smoothstep)
+- `smid|smoothMid(a,b,c)` clamp b to [a,c] with [smoothing](https://en.wikipedia.org/wiki/Smoothstep)
 - `dst|distance(x1,y1,x2,y2)` distance between points
 - `rnd|random()` random \[0-1)
 - `rnd|random(a)` random \[0-a)

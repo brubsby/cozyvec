@@ -84,6 +84,37 @@ function Api(client) {
     client.plotarea.resize([width,height],name,isPortrait)
   }
 
+  this.marginBox = (...args) => {
+    const w = client.plotarea.paperWidth
+    const h = client.plotarea.paperHeight
+    if(args.length == 0) {
+      const m = 40;
+      return [m, m, w-m, h-m]
+    }
+    if(args.length == 1) {
+      const m = args[0];
+      return [m, m, w-m, h-m]
+    }
+    if(args.length == 2) {
+      const v = args[0];
+      const h = args[1];
+      return [h, v, w-h, h-v]
+    }
+    if(args.length == 3) {
+      const t = args[0];
+      const h = args[1];
+      const b = args[2];
+      return [h, t, w-h, h-b]
+    }
+    if(args.length == 4) {
+      const t = args[0];
+      const r = args[1];
+      const b = args[2];
+      const l = args[3]
+      return [l, t, w-r, h-b]
+    }
+  }
+
   this.builtins = () => [
     [Math.PI, ["PI"]],
     [Math.PI*2, ["TAU", "TWO_PI"]],
@@ -117,8 +148,9 @@ function Api(client) {
     [(x) => Math.pow(x,3), ["cub", "cube"]],
     [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
     [this.mid, ["mid"]],
-    [this.smooth_mid, ["smid"]],
-    [()=>{}, ["ppr", "paper"]]
+    [this.smooth_mid, ["smid","smoothMid"]],
+    [()=>{}, ["ppr", "paper"]],
+    [this.marginBox, ["mbox", "marginBox"]]
   ]
 
   this.run = function(txt) {
