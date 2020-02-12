@@ -131,8 +131,8 @@ function Api(client) {
       }
     }
     client.plotarea.reset()
-    const beginningPaper = txt.match('^\\s*(ppr|paper)\\([^\\)]*\\)')
-    const otherPaper = txt.match('(?<!^)(ppr|paper)\\([^\\)]*\\)')
+    const beginningPaper = txt.match(/^\s*(ppr|paper)\([^\)]*\)/)
+    const otherPaper = txt.match(/(?<!^\s*)\b(ppr|paper)\([^\)]*\)/)
     try {
       if (otherPaper) {
         throw EvalError("ppr|paper() must be called first")
