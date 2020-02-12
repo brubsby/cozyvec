@@ -18,14 +18,25 @@ function CodeArea(client) {
     this._input.setAttribute('autocorrect', 'off')
     this._input.setAttribute('autocapitalize', 'off')
     this._input.setAttribute('spellcheck', 'false')
+    this._input.addEventListener('input', this.onInput)
+    this._input.addEventListener('click', this.onClick)
   }
 
   this.start = function() {
     this._input.focus()
+    this.setLog()
   }
 
   this.run = function(txt = this._input.value) {
     client.run(txt)
+  }
+
+  this.onInput = () => {
+    this.setInfo()
+  }
+
+  this.onClick = () => {
+    this.setInfo()
   }
 
   this.load = function(txt) {
@@ -36,14 +47,17 @@ function CodeArea(client) {
     this.load('')
   }
 
-  this.setStatus = function(msg) {
+  this.setLog = function(msg) {
     msg = msg || '\u00a0'
     if (msg !== this._log.textContent) {
       this._log.textContent = msg
     }
-    const paper_info = `${client.plotarea.paperName} Paper : ${client.plotarea.paperWidth} x ${client.plotarea.paperHeight} mm : ${client.plotarea.isPortrait ? "Portrait" : "Landscape"}`
-    if (paper_info !== this._docs.textContent) {
-      this._docs.textContent = `${paper_info}`
+  }
+
+  this.setInfo = function() {
+    const info = `${client.plotarea.paperName} Paper : ${client.plotarea.paperWidth} x ${client.plotarea.paperHeight} mm : ${client.plotarea.isPortrait ? "Portrait" : "Landscape"} : ${this._input.value.length}`
+    if (info !== this._docs.textContent) {
+      this._docs.textContent = `${info}`
     }
   }
 }

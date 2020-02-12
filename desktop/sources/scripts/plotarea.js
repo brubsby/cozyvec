@@ -70,8 +70,8 @@ function PlotArea(client) {
 
     this.penWidth(this.penWidthMM)
     this.paperName = name
-    
-    client.codearea.setStatus()
+
+    client.codearea.setInfo()
   }
 
   this.moveLastCoords = function(x,y) {

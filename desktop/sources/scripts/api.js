@@ -59,7 +59,7 @@ function Api(client) {
     const v = this.mid(0,(x-low)/(high-low),1)
     return v * v * v * ( v * ( v * 6 - 15 ) + 10 ) * (high - low) + low
   }
-  
+
   this.paper = (...args) => {
     if (typeof args[0] === 'string' || args[0] instanceof String) {
       const paper_lookup = client.papersizes.SIZES_DICT[args[0]]
@@ -72,7 +72,7 @@ function Api(client) {
       this.customPaper(...args)
     }
   }
-  
+
   this.customPaper = (width,height,name,isPortrait) => {
     name = name || 'Custom'
     client.plotarea.resize([width,height],name,isPortrait)
@@ -131,7 +131,7 @@ function Api(client) {
       var lineInfo = e.stack.match('(?<=<anonymous>:)\\d+:\\d+')
       if (lineInfo) {
         const lineInfoSplit = lineInfo[0].split(':')
-        lineInfo = `${lineInfoSplit[0]-2}:${lineInfoSplit[1]}`
+        lineInfo = `${lineInfoSplit[0]}:${lineInfoSplit[1]}`
       }
       client.message(e.message + (lineInfo ? ` : ${lineInfo}` : ''))
     }

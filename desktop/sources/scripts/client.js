@@ -78,11 +78,11 @@ function Client() {
   }
 
   this.message = (txt) => {
-    this.codearea.setStatus(txt)
+    this.codearea.setLog(txt)
   }
 
   this.run = (txt) => {
-    this.codearea.setStatus('')
+    this.codearea.setLog()
     this.api.run(txt)
   }
 }
