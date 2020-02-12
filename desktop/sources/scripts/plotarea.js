@@ -119,7 +119,6 @@ function PlotArea(client) {
   }
 
   this.polylinesToSVG = function(polylines, opt = {}) {
-    const DEFAULT_SVG_LINE_WIDTH = 0.3
     const paperDimensions = opt.paperDimensions
     const drawDimensions = opt.drawDimensions
     if (!paperDimensions || !drawDimensions) throw new TypeError('must specify dimensions currently')
@@ -140,7 +139,7 @@ function PlotArea(client) {
     const viewHeight = (drawDimensions[1]).toFixed(decimalPlaces)
     const fillStyle = opt.fillStyle || 'none'
     const strokeStyle = opt.strokeStyle || 'black'
-    const lineWidth = opt.lineWidth !== undefined ? opt.lineWidth : DEFAULT_SVG_LINE_WIDTH
+    const lineWidth = opt.lineWidth !== undefined ? opt.lineWidth : this.penWidthMM
 
     return `<?xml version="1.0" standalone="no"?>
     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"

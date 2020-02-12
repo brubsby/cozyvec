@@ -109,6 +109,7 @@ function Api(client) {
     [this.noise.bind(this), ["nse", "noise"]],
     [client.plotarea.width, ["W", "WIDTH"]],
     [client.plotarea.height, ["H", "HEIGHT"]],
+    [client.plotarea.penWidth.bind(client.plotarea), ["pen"]],
     [client.plotarea.lineTo.bind(client.plotarea), ["l2", "lineTo"]],
     [client.plotarea.moveTo.bind(client.plotarea), ["m2", "moveTo"]],
     [client.plotarea.closePath.bind(client.plotarea), ["clsp", "closePath"]],

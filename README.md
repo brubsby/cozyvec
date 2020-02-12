@@ -26,6 +26,7 @@ Cross-platform build downloads to come soon
 - `clsp|closePath()` draw line to last move to point
 - `ppr|paper(name[,orientation])` change paper to size in library
 - `ppr|paper(w,h[,name[,orientation]])` custom paper in mm
+- `pen(w)` pen width in mm
 - `W|WIDTH` canvas width
 - `H|HEIGHT` canvas width
 - `PI` π
