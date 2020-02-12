@@ -118,7 +118,7 @@ function Api(client) {
     [(x1,y1,x2,y2) => Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)), ["dst", "distance"]],
     [this.mid, ["mid"]],
     [this.smooth_mid, ["smid"]],
-    [this.paper, ["ppr", "paper"]]
+    [()=>{}, ["ppr", "paper"]]
   ]
 
   this.run = function(txt) {
@@ -131,7 +131,15 @@ function Api(client) {
       }
     }
     client.plotarea.reset()
+    const beginningPaper = txt.match('^\\s*(ppr|paper)\\([^\\)]*\\)')
+    const otherPaper = txt.match('(?<!^)(ppr|paper)\\([^\\)]*\\)')
     try {
+      if (otherPaper) {
+        throw EvalError("ppr|paper() must be called first")
+      }
+      if (beginningPaper) {
+        new Function("ppr","paper",beginningPaper[0])(this.paper,this.paper)
+      }
       const drawFunction = new Function(...Object.keys(flatApi),txt)
       drawFunction(...Object.values(flatApi))
     } catch(e) {
