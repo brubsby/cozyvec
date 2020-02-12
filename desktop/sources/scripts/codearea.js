@@ -55,7 +55,7 @@ function CodeArea(client) {
   }
 
   this.setInfo = function() {
-    const info = `${client.plotarea.paperName} : ${client.plotarea.paperWidth} x ${client.plotarea.paperHeight} mm : ${client.plotarea.isPortrait ? "Portrait" : "Landscape"} : ${this._input.value.length}`
+    const info = `${client.plotarea.paperName} : ${client.plotarea.paperWidth} x ${client.plotarea.paperHeight} mm : ${client.plotarea.penWidthMM} mm : ${client.plotarea.isPortrait ? "P" : "L"} : ${this._input.value.length}`
     if (info !== this._docs.textContent) {
       this._docs.textContent = `${info}`
     }

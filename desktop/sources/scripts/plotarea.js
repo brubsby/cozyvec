@@ -34,11 +34,6 @@ function PlotArea(client) {
     this.orientation(!this.isPortrait)
   }
 
-  this.penWidth = function(width_mm) {
-    this.penWidthMM = width_mm
-    this.context.lineWidth = width_mm / this.paperHeight * this.height
-  }
-
   this.mmToPixel = x => x / this.paperHeight * this.height
 
   this.mmCoordToPixelCoord = function(mm_coord) {
@@ -47,6 +42,12 @@ function PlotArea(client) {
     } else {
         return this.mmToPixel(mm_cord)
     }
+  }
+
+  this.penWidth = function(width_mm) {
+    this.penWidthMM = width_mm
+    this.context.lineWidth = this.mmToPixel(width_mm)
+    client.codearea.setInfo()
   }
 
   this.resize = function(paperDims = [this.paperWidth, this.paperHeight], name=this.paperName, isPortrait = this.isPortrait, margin = this.margin) {
