@@ -39,6 +39,16 @@ function PlotArea(client) {
     this.context.lineWidth = width_mm / this.paperHeight * this.height
   }
 
+  this.mmToPixel = x => x / this.paperHeight * this.height
+
+  this.mmCoordToPixelCoord = function(mm_coord) {
+    if (Array.isArray(mm_coord)) {
+      return mm_coord.map(this.mmToPixel)
+    } else {
+        return this.mmToPixel(mm_cord)
+    }
+  }
+
   this.resize = function(paperDims = [this.paperWidth, this.paperHeight], name=this.paperName, isPortrait = this.isPortrait, margin = this.margin) {
     const windowWidth = window.innerWidth
     const windowHeight = window.innerHeight
@@ -79,21 +89,25 @@ function PlotArea(client) {
     this.lastY = y
   }
 
-  this.lineTo = function(x,y) {
-    this.context.beginPath()
-    this.context.moveTo(this.lastX, this.lastY)
-    this.context.lineTo(x, y)
-    this.context.stroke()
-    this.currentPolyline.push([x, y])
-    this.moveLastCoords(x, y)
-  }
-
-  this.moveTo = function(x,y) {
-    if (this.currentPolyline.length > 1) this.polylines.push(this.currentPolyline)
-    this.currentPolyline = [[x, y]]
+  this.moveLastMoveToCoords = function(x,y) {
     this.lastMoveToX = x
     this.lastMoveToY = y
-    this.moveLastCoords(x, y)
+  }
+
+  this.lineTo = function(mm_x,mm_y) {
+    this.context.beginPath()
+    this.context.moveTo(this.mmToPixel(this.lastX), this.mmToPixel(this.lastY))
+    this.context.lineTo(this.mmToPixel(mm_x), this.mmToPixel(mm_y))
+    this.context.stroke()
+    this.currentPolyline.push([mm_x, mm_y])
+    this.moveLastCoords(mm_x, mm_y)
+  }
+
+  this.moveTo = function(mm_x,mm_y) {
+    if (this.currentPolyline.length > 1) this.polylines.push(this.currentPolyline)
+    this.currentPolyline = [[mm_x, mm_y]]
+    this.moveLastMoveToCoords(mm_x, mm_y)
+    this.moveLastCoords(mm_x, mm_y)
   }
 
   this.closePath = function() {
@@ -108,20 +122,16 @@ function PlotArea(client) {
   this.reset = function() {
     this.clear()
     this.moveLastCoords(0, 0)
+    this.moveLastMoveToCoords(0, 0)
   }
 
   this.getSvg = function() {
-    return this.polylinesToSVG(this.polylines,
-      {
-        paperDimensions: [this.paperWidth, this.paperHeight],
-        drawDimensions: [this.width, this.height]
-      })
+    return this.polylinesToSVG(this.polylines, {paperDimensions: [this.paperWidth, this.paperHeight]})
   }
 
   this.polylinesToSVG = function(polylines, opt = {}) {
     const paperDimensions = opt.paperDimensions
-    const drawDimensions = opt.drawDimensions
-    if (!paperDimensions || !drawDimensions) throw new TypeError('must specify dimensions currently')
+    if (!paperDimensions) throw new TypeError('must specify dimensions currently')
     const decimalPlaces = 5
 
     let commands = []
@@ -135,8 +145,8 @@ function PlotArea(client) {
     });
 
     const svgPath = commands.join(' ')
-    const viewWidth = (drawDimensions[0]).toFixed(decimalPlaces)
-    const viewHeight = (drawDimensions[1]).toFixed(decimalPlaces)
+    const viewWidth = (paperDimensions[0]).toFixed(decimalPlaces)
+    const viewHeight = (paperDimensions[1]).toFixed(decimalPlaces)
     const fillStyle = opt.fillStyle || 'none'
     const strokeStyle = opt.strokeStyle || 'black'
     const lineWidth = opt.lineWidth !== undefined ? opt.lineWidth : this.penWidthMM
