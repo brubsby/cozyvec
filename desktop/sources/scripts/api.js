@@ -1,5 +1,11 @@
 function Api(client) {
   this.simplex = new SimplexNoise()
+  this.newFunctionStartLine = (() => {
+    try {(new Function('undefined_function()'))()}
+    catch(e) {return parseInt(e.stack.match('(?<=<anonymous>:)\\d+'))}
+    return 1
+  })()
+  this.newFunctionLineOffset = this.newFunctionStartLine - 1
 
   this.seed = (seed = 0) => {
     Math.seedrandom(seed)
@@ -131,7 +137,7 @@ function Api(client) {
       var lineInfo = e.stack.match('(?<=<anonymous>:)\\d+:\\d+')
       if (lineInfo) {
         const lineInfoSplit = lineInfo[0].split(':')
-        lineInfo = `${lineInfoSplit[0]}:${lineInfoSplit[1]}`
+        lineInfo = `${lineInfoSplit[0]-this.newFunctionLineOffset}:${lineInfoSplit[1]}`
       }
       client.message(e.message + (lineInfo ? ` : ${lineInfo}` : ''))
     }
