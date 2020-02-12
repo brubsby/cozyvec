@@ -39,6 +39,13 @@ function Client() {
 
     this.acels.addTemplate(this.papersizes.buildMenuTemplate((dims, name) => this.plotarea.resize(dims, name)))
 
+    this.acels.addTemplate({
+      label: "Pen Size",
+      submenu: ['0.1','0.13','0.18','0.2','0.25','0.35','0.3','0.35','0.4','0.5','0.6','0.7','0.8','1.0','1.4','2.0'].map(size => {return {
+        label: size, click: () => this.plotarea.penWidth(parseFloat(size))
+      }})
+    })
+
     this.acels.set('Orientation', 'Toggle Orientation', 'CmdOrCtrl+P', () => this.plotarea.orientationToggle())
 
     this.acels.install(window)
