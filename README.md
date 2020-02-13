@@ -8,6 +8,8 @@ The library has been designed for brevity, so the code for a specific plot can b
 
 Browser version available at: https://brubsby.github.io/cozyvec
 
+![Image](https://github.com/brubsby/cozyvec/blob/master/resources/web_example.png)
+
 However, the Electron experience is more polished (menu items).
 
 ## Install & Run
