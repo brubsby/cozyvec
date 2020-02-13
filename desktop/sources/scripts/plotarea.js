@@ -7,6 +7,8 @@ function PlotArea(client) {
   this.isPortrait = true
   this.pixelRatio = window.devicePixelRatio
   this.context = this.el.getContext('2d')
+  this.context.lineCap = "round"
+  this.context.lineJoin = "round"
   this.polylines = []
   this.currentPolyline = []
   this.penWidthMM = 0.3
