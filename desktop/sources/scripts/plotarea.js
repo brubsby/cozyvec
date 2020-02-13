@@ -142,7 +142,7 @@ function PlotArea(client) {
         const type = (j === 0) ? 'M' : 'L'
         const x = (point[0]).toFixed(decimalPlaces)
         const y = (point[1]).toFixed(decimalPlaces)
-        commands.push(`${type} ${x} ${y}`)
+        commands.push(`${type}${x} ${y}`)
       });
     });
 
@@ -151,6 +151,8 @@ function PlotArea(client) {
     const viewHeight = (paperDimensions[1]).toFixed(decimalPlaces)
     const fillStyle = opt.fillStyle || 'none'
     const strokeStyle = opt.strokeStyle || 'black'
+    const strokeLinejoin = opt.strokeLinejoin || 'round'
+    const strokeLinecap = opt.strokeLineCap || 'round'
     const lineWidth = opt.lineWidth !== undefined ? opt.lineWidth : this.penWidthMM
 
     return `<?xml version="1.0" standalone="no"?>
@@ -158,8 +160,8 @@ function PlotArea(client) {
       "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
     <svg width="${paperDimensions[0]}mm" height="${paperDimensions[1]}mm"
          xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${viewWidth} ${viewHeight}">
-     <g>
-       <path d="${svgPath}" fill="${fillStyle}" stroke="${strokeStyle}" stroke-width="${lineWidth}mm" />
+     <g fill="${fillStyle}" stroke="${strokeStyle}" stroke-width="${lineWidth}mm" stroke-linejoin="${strokeLinejoin}" stroke-linecap="${strokeLinecap}">
+       <path d="${svgPath}" />
      </g>
   </svg>`
   }
