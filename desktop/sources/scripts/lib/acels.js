@@ -104,7 +104,8 @@ function Acels (client) {
     injection.push({
       label: name,
       submenu: [
-        { label: 'About', click: () => { require('electron').shell.openExternal('https://github.com/' + githubUser + '/' + name) } },
+        { label: 'About', click: () => { require('electron').shell.openExternal(`https://github.com/${githubUser}/${name}`) } },
+        { label: 'Documentation', click: () => { require('electron').shell.openExternal(`https://github.com/${githubUser}/${name}#Library`) } },
         { label: 'Fullscreen', accelerator: 'CmdOrCtrl+Enter', click: () => { app.toggleFullscreen() } },
         { label: 'Hide', accelerator: 'CmdOrCtrl+H', click: () => { app.toggleVisible() } },
         { label: 'Toggle Menubar', accelerator: 'Alt+H', click: () => { app.toggleMenubar() } },
