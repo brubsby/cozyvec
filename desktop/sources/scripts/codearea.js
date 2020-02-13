@@ -20,6 +20,10 @@ function CodeArea(client) {
     this._input.setAttribute('spellcheck', 'false')
     this._input.addEventListener('input', this.onInput)
     this._input.addEventListener('click', this.onClick)
+
+    this._input.onkeydown = (e) => {
+      if (e.keyCode === 9 || e.which === 9) { e.preventDefault(); this.inject('  ') }
+    }
   }
 
   this.start = function() {
@@ -45,6 +49,11 @@ function CodeArea(client) {
 
   this.clear = function() {
     this.load('')
+  }
+
+  this.inject = function (injection, at = this._input.selectionStart) {
+    document.execCommand('insertText', false, injection)
+    this._input.selectionEnd = at + injection.length
   }
 
   this.setLog = function(msg) {
