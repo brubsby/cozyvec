@@ -81,6 +81,7 @@ function PlotArea(client) {
 
     this.penWidth(this.penWidthMM)
     this.paperName = name
+    this.isPortrait = isPortrait
 
     client.codearea.setInfo()
   }
