@@ -76,9 +76,13 @@ function PaperSizes () {
     [ 'C9', 40, 57, 'International', 'C Series' ],
     [ 'C10', 28, 40, 'International', 'C Series' ],
     [ 'C11', 22, 32, 'International', 'C Series' ],
-    [ 'C12', 16, 22, 'International', 'C Series' ]
+    [ 'C12', 16, 22, 'International', 'C Series' ],
+    [ 'AxiDraw MiniKit', 160, 101, 'Plotters' ],
+    [ 'AxiDraw V3', 300, 218, 'Plotters' ],
+    [ 'AxiDraw V3/A3', 430, 297, 'Plotters' ],
+    [ 'AxiDraw V3 XLX', 595, 218, 'Plotters' ]
   ]
-  
+
   this.asDict = function () {
     const returnDict = {}
     for (const paper of this.SIZES) {
@@ -86,7 +90,7 @@ function PaperSizes () {
     }
     return returnDict
   }
-  
+
   this.SIZES_DICT = this.asDict()
 
   this.buildMenuTemplate = function(onClick) {
