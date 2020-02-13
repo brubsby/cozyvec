@@ -72,12 +72,23 @@ function Source (client) {
     if (type === 'image/png' || type === 'image/jpeg') {
       link.setAttribute('href', content)
     } else {
-      link.setAttribute('href', 'data:' + type + ';' + settings + ',' + encodeURIComponent(content))
+      link.setAttribute('href', URL.createObjectURL(dataURItoBlob(content, type)))
     }
     link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
   }
 
   function timestamp() {
     return Math.round((new Date()).getTime() / 1000).toString(16).toUpperCase()
+  }
+
+  function dataURItoBlob(data,mimeString) {
+    var byteString = data//atob(data);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], {type: mimeString});
+
   }
 }
