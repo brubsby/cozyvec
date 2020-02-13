@@ -160,7 +160,7 @@ function PlotArea(client) {
       "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
     <svg width="${paperDimensions[0]}mm" height="${paperDimensions[1]}mm"
          xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${viewWidth} ${viewHeight}">
-     <g fill="${fillStyle}" stroke="${strokeStyle}" stroke-width="${lineWidth}mm" stroke-linejoin="${strokeLinejoin}" stroke-linecap="${strokeLinecap}">
+     <g fill="${fillStyle}" stroke="${strokeStyle}" stroke-width="${lineWidth}" stroke-linejoin="${strokeLinejoin}" stroke-linecap="${strokeLinecap}">
        <path d="${svgPath}" />
      </g>
   </svg>`
