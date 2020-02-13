@@ -97,14 +97,14 @@ function Api(client) {
     }
     if(args.length == 2) {
       const v = args[0];
-      const h = args[1];
-      return [h, v, w-h, h-v]
+      const z = args[1];
+      return [z, v, w-z, h-v]
     }
     if(args.length == 3) {
       const t = args[0];
-      const h = args[1];
+      const z = args[1];
       const b = args[2];
-      return [h, t, w-h, h-b]
+      return [z, t, w-z, h-b]
     }
     if(args.length == 4) {
       const t = args[0];
