@@ -155,22 +155,22 @@ function Api(client) {
 
   this.run = function(txt) {
     txt += "\nmoveTo(0,0)"
-    this.seed((new Date()).getTime())
-    const flatApi = {}
-    for (const parameterList of this.builtins()) {
-      for (const alias of parameterList[1]) {
-        flatApi[alias] = parameterList[0]
-      }
-    }
-    client.plotarea.reset()
-    const beginningPaper = txt.match(/^\s*(ppr|paper)\([^\)]*\)/)
-    const otherPaper = txt.match(/(?<!^\s*)\b(ppr|paper)\([^\)]*\)/)
+      this.seed((new Date()).getTime())
     try {
+      client.plotarea.reset()
+      const beginningPaper = txt.match(/^\s*(ppr|paper)\([^\)]*\)/)
+      const otherPaper = txt.match(/(?<!^\s*)\b(ppr|paper)\([^\)]*\)/)
       if (otherPaper) {
         throw EvalError("ppr|paper() must be called first")
       }
       if (beginningPaper) {
         new Function("ppr","paper",beginningPaper[0])(this.paper,this.paper)
+      }
+      const flatApi = {}
+      for (const parameterList of this.builtins()) {
+        for (const alias of parameterList[1]) {
+          flatApi[alias] = parameterList[0]
+        }
       }
       const drawFunction = new Function(...Object.keys(flatApi),txt)
       drawFunction(...Object.values(flatApi))
