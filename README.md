@@ -81,3 +81,4 @@ Cross-platform build downloads to come soon
 - `CmdOrCtrl+N` new file
 - `CmdOrCtrl+O` open .cv file
 - `CmdOrCtrl+S` save .cv file
+- `CmdOrCtrl+Tab` dev console
