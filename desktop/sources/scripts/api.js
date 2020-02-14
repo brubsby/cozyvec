@@ -171,8 +171,8 @@ function Api(client) {
     try {
       client.plotarea.reset()
       const beginningPaper = txt.match(/^(\s|\/\/[^\n]*\n|\/\*(.|\n)*?\*\/)*(ppr|paper)\([^\)]*\)/)
-      const otherPaper = txt.match(/(?<!^(\s|\/\/[^\n]*\n|\/\*(.|\n)*?\*\/)*)\b(ppr|paper)\([^\)]*\)/)
-      if (otherPaper) {
+      const allPapers = txt.match(/\b(ppr|paper)\([^\)]*\)/g)
+      if (allPapers && ((allPapers.length == 1 && !beginningPaper) || (allPapers.length > 1))) {
         throw EvalError("call ppr|paper() only once at start")
       }
       if (beginningPaper) {
