@@ -18,6 +18,7 @@ app.on('ready', () => {
    minWidth: 380,
    minHeight: 360,
    backgroundColor: '#000',
+   icon: path.join(__dirname, { darwin: 'icon.icns', linux: 'icon.png', win32: 'icon.ico' }[process.platform] || 'icon.ico'),
    webPreferences: {
      nodeIntegration: true
    }
@@ -25,7 +26,7 @@ app.on('ready', () => {
  })
 
  app.win.loadURL(`file://${__dirname}/sources/index.html`)
- //app.inspect()
+ app.inspect()
 
  app.win.on('closed', function () {
    app.win = null
