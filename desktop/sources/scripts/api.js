@@ -115,6 +115,10 @@ function Api(client) {
     }
   }
 
+  this.error = (s = "Error") => {
+    throw new Error(s)
+  }
+
   this.builtins = () => [
     [Math.PI, ["PI"]],
     [Math.PI*2, ["TAU", "TWO_PI"]],
@@ -150,7 +154,8 @@ function Api(client) {
     [this.mid, ["mid"]],
     [this.smooth_mid, ["smid","smoothMid"]],
     [()=>{}, ["ppr", "paper"]],
-    [this.marginBox, ["mbox", "marginBox"]]
+    [this.marginBox, ["mbox", "marginBox"]],
+    [this.error, ["err", "error"]]
   ]
 
   this.run = function(txt) {
