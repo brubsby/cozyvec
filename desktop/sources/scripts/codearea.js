@@ -27,6 +27,7 @@ function CodeArea(client) {
   }
 
   this.start = function() {
+    this.load(this.splash)
     this._input.focus()
     this.setLog()
   }
@@ -69,4 +70,33 @@ function CodeArea(client) {
       this._docs.textContent = `${info}`
     }
   }
+
+  this.splash =
+`// Welcome to cozyvec!
+
+// cmdorctrl+G for documentation
+// cmdorctrl+R to run
+
+paper("letter", true)
+pen(.6)
+
+frequency = random(0.005, 0.04)
+amplitude = random(3, 9)
+octaves = floor(random(1, 3.25))
+num_lines = random(200, 300)
+verts_per_line = 999
+
+for(i = 0; i < num_lines; i++) {
+  t = 0
+  for(j = 0; j < verts_per_line; j++) {
+    y = HEIGHT * i / num_lines
+    x = WIDTH * j / verts_per_line
+    y = y + noise( [x,y], frequency, amplitude, octaves )
+    if(abs(WIDTH/2-x) + abs(HEIGHT/2-y) < min(W,H)/4 ) {
+      ( t++ ? lineTo : moveTo )( x, y )
+    } else {
+      t = 0
+    }
+  }
+}`
 }
