@@ -7,7 +7,8 @@ function PlotArea(client) {
   this.isPortrait = true
   this.pixelRatio = window.devicePixelRatio
   this.context = this.el.getContext('2d')
-  this.polylines = []
+  this.groups = []
+  this.currentPolylines = []
   this.currentPolyline = []
   this.penWidthMM = 0.3
 
@@ -42,12 +43,6 @@ function PlotArea(client) {
     } else {
         return this.mmToPixel(mm_cord)
     }
-  }
-
-  this.penWidth = function(width_mm) {
-    this.penWidthMM = width_mm
-    this.context.lineWidth = this.mmToPixel(width_mm)
-    client.codearea.setInfo()
   }
 
   this.resize = function(paperDims = [this.paperWidth, this.paperHeight], name=this.paperName, isPortrait = this.isPortrait, margin = this.margin) {
@@ -96,7 +91,7 @@ function PlotArea(client) {
     this.lastMoveToY = y
   }
 
-  this.lineTo = function(mm_x,mm_y) {
+  this.lineTo = function(mm_x, mm_y) {
     this.context.lineCap = "round"
     this.context.lineJoin = "round"
     this.context.beginPath()
@@ -107,64 +102,82 @@ function PlotArea(client) {
     this.moveLastCoords(mm_x, mm_y)
   }
 
-  this.moveTo = function(mm_x,mm_y) {
-    if (this.currentPolyline.length > 1) this.polylines.push(this.currentPolyline)
-    this.currentPolyline = [[mm_x, mm_y]]
+  this.moveTo = function(mm_x, mm_y) {
+    this.flushPolyline(mm_x, mm_y)
     this.moveLastMoveToCoords(mm_x, mm_y)
     this.moveLastCoords(mm_x, mm_y)
   }
 
   this.closePath = function() {
     this.lineTo(this.lastMoveToX, this.lastMoveToY)
+    this.moveTo(this.lastMoveToX, this.lastMoveToY)
+  }
+
+  this.penWidth = function(width_mm) {
+    this.flushPolyline(this.lastX, this.lastY)
+    this.flushPolylines()
+    this.penWidthMM = width_mm
+    this.context.lineWidth = this.mmToPixel(width_mm)
+    client.codearea.setInfo()
+  }
+
+  this.flushPolylines = function() {
+    if (this.currentPolylines.length > 0) {
+      this.groups.push(
+        { polylines: this.currentPolylines, opt: { lineWidth: this.penWidthMM } }
+      )
+    }
+    this.currentPolylines = []
+  }
+
+  this.flushPolyline = function(mm_x, mm_y) {
+    if (this.currentPolyline.length > 1) this.currentPolylines.push(this.currentPolyline)
+    this.currentPolyline = [[mm_x, mm_y]]
   }
 
   this.clear = function() {
     this.context.clearRect(0, 0, this.width, this.height)
-    this.polylines = []
   }
 
   this.reset = function() {
     this.clear()
-    this.moveLastCoords(0, 0)
-    this.moveLastMoveToCoords(0, 0)
+    this.moveTo(0, 0)
+    this.groups = []
+    this.currentPolylines = []
+    this.currentPolyline = [[0, 0]]
   }
 
   this.getSvg = function() {
-    return this.polylinesToSVG(this.polylines, {paperDimensions: [this.paperWidth, this.paperHeight]})
+    this.flushPolyline(0, 0)
+    this.flushPolylines()
+    return this.polylineGroupsToSVG(this.groups, {paperDimensions: [this.paperWidth, this.paperHeight]})
   }
 
-  this.polylinesToSVG = function(polylines, opt = {}) {
+  this.polylineGroupsToSVG = function(groups, opt = {}) {
     const paperDimensions = opt.paperDimensions
     if (!paperDimensions) throw new TypeError('must specify dimensions currently')
     const decimalPlaces = 5
 
-    let commands = []
-    polylines.forEach(line => {
-      line.forEach((point, j) => {
+    return `<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="${paperDimensions[0]}mm" height="${paperDimensions[1]}mm" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${paperDimensions[0]} ${paperDimensions[1]}">
+${groups.map(group => {
+    const fillStyle = group.opt.fillStyle || opt.fillStyle || 'none'
+    const strokeStyle = group.opt.strokeStyle || opt.strokeStyle || 'black'
+    const strokeLinejoin = group.opt.strokeLinejoin || opt.strokeLinejoin || 'round'
+    const strokeLinecap = group.opt.strokeLineCap || opt.strokeLineCap || 'round'
+    const lineWidth = group.opt.lineWidth || opt.lineWidth || this.penWidthMM
+    return `  <g fill="${fillStyle}" stroke="${strokeStyle}" stroke-width="${lineWidth}" stroke-linejoin="${strokeLinejoin}" stroke-linecap="${strokeLinecap}">
+${group.polylines.map(polyline => {
+      return `    <path d="${polyline.map((point, j) => {
         const type = (j === 0) ? 'M' : 'L'
         const x = (point[0]).toFixed(decimalPlaces)
         const y = (point[1]).toFixed(decimalPlaces)
-        commands.push(`${type}${x} ${y}`)
-      });
-    });
-
-    const svgPath = commands.join(' ')
-    const viewWidth = (paperDimensions[0]).toFixed(decimalPlaces)
-    const viewHeight = (paperDimensions[1]).toFixed(decimalPlaces)
-    const fillStyle = opt.fillStyle || 'none'
-    const strokeStyle = opt.strokeStyle || 'black'
-    const strokeLinejoin = opt.strokeLinejoin || 'round'
-    const strokeLinecap = opt.strokeLineCap || 'round'
-    const lineWidth = opt.lineWidth !== undefined ? opt.lineWidth : this.penWidthMM
-
-    return `<?xml version="1.0" standalone="no"?>
-    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
-      "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-    <svg width="${paperDimensions[0]}mm" height="${paperDimensions[1]}mm"
-         xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${viewWidth} ${viewHeight}">
-     <g fill="${fillStyle}" stroke="${strokeStyle}" stroke-width="${lineWidth}" stroke-linejoin="${strokeLinejoin}" stroke-linecap="${strokeLinecap}">
-       <path d="${svgPath}" />
-     </g>
-  </svg>`
+        return `${type}${x} ${y}`
+      }).join(' ')}" />`
+    }).join('\n')}
+  </g>`
+  }).join('\n')}
+</svg>`
   }
 }

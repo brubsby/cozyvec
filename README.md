@@ -1,6 +1,6 @@
 # cozyvec
 
-cozyvec is a terminal program for creating [plotter](https://en.wikipedia.org/wiki/Plotter) art (specifically via svg files) with minimal setup.
+cozyvec is a terminal program for creating [plotter](https://en.wikipedia.org/wiki/Plotter) art (specifically via SVG files) with minimal setup.
 
 The library has been designed for brevity, so the code for a specific plot can be tweeted under the hashtag [#cozyvec](https://twitter.com/hashtag/cozyvec) (much like PICO-8's [#tweetcart](https://twitter.com/hashtag/tweetcart) and processing's [#つぶやきProcessing](https://twitter.com/hashtag/つぶやきProcessing)) by providing shortcut versions of most tokens that are 1-4 characters.
 
@@ -32,7 +32,7 @@ Cross-platform build downloads to come soon
 - `clsp|closePath()` draw line to last move to point
 - `ppr|paper(name[,orientation])` change paper to size in library
 - `ppr|paper(w,h[,name[,orientation]])` custom paper in mm
-- `pen(w)` pen width in mm
+- `pen(w)` pen width in mm, also starts new SVG group (to help with pen swapping)
 - `mbox|marginBox([a[,b[,c[,d]]]])` create bounding box with margins [x1,y1,x2,y2] default 40 mm, partial arguments follow css margin conventions
 - `log(s)` log message s, gets overwritten by errors and other logs
 - `err|error(s)` error message s and quit
