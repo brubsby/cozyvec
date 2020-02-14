@@ -67,7 +67,9 @@ function Api(client) {
   }
 
   this.paper = (...args) => {
-    if (typeof args[0] === 'string' || args[0] instanceof String) {
+    const usageMsg = "usage: paper|ppr (s)|(w,h[,n[,o]])"
+    if(args.length == 0) throw TypeError(usageMsg)
+    if(typeof args[0] === 'string' || args[0] instanceof String) {
       const paper_lookup = client.papersizes.SIZES_DICT[args[0]]
       if(paper_lookup) {
         this.customPaper(paper_lookup[0], paper_lookup[1], args[0], args[1])
@@ -75,6 +77,7 @@ function Api(client) {
         throw new TypeError(`"${args[0]}" paper not found.`)
       }
     } else {
+      if(args.length == 1) throw TypeError(usageMsg)
       this.customPaper(...args)
     }
   }
@@ -168,10 +171,10 @@ function Api(client) {
       this.seed((new Date()).getTime())
     try {
       client.plotarea.reset()
-      const beginningPaper = txt.match(/^\s*(ppr|paper)\([^\)]*\)/)
-      const otherPaper = txt.match(/(?<!^\s*)\b(ppr|paper)\([^\)]*\)/)
+      const beginningPaper = txt.match(/^(\s|\/\/[^\n]*\n|\/\*(.|\n)*?\*\/)*(ppr|paper)\([^\)]*\)/)
+      const otherPaper = txt.match(/(?<!^(\s|\/\/[^\n]*\n|\/\*(.|\n)*?\*\/)*)\b(ppr|paper)\([^\)]*\)/)
       if (otherPaper) {
-        throw EvalError("ppr|paper() must be called first")
+        throw EvalError("call ppr|paper() only once at start")
       }
       if (beginningPaper) {
         new Function("ppr","paper",beginningPaper[0])(this.paper,this.paper)
