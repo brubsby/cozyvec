@@ -186,7 +186,7 @@ function Api(client) {
       const globalKeys = Object.keys(global)
       drawFunction(...Object.values(flatApi))
       //delete global variables the user function created
-      new Function(Object.keys(global).filter(x => !globalKeys.includes(x)).map(x => `delete window.${x};`))()
+      Object.keys(global).filter(x => !globalKeys.includes(x)).forEach(x => delete window[x])
     } catch(e) {
       var lineInfo = e.stack.match('(?<=<anonymous>:)\\d+:\\d+')
       if (lineInfo) {
