@@ -183,7 +183,10 @@ function Api(client) {
         }
       }
       const drawFunction = new Function(...Object.keys(flatApi),txt)
+      const globalKeys = Object.keys(global)
       drawFunction(...Object.values(flatApi))
+      //delete global variables the user function created
+      new Function(Object.keys(global).filter(x => !globalKeys.includes(x)).map(x => `delete window.${x};`))()
     } catch(e) {
       var lineInfo = e.stack.match('(?<=<anonymous>:)\\d+:\\d+')
       if (lineInfo) {
