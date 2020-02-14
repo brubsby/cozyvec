@@ -84,3 +84,10 @@ Cross-platform build downloads to come soon
 - `CmdOrCtrl+O` open .cv file
 - `CmdOrCtrl+S` save .cv file
 - `CmdOrCtrl+Tab` dev console
+
+
+## Paper Sizes
+
+Paper sizes are defined [here](https://github.com/brubsby/cozyvec/blob/master/desktop/sources/scripts/papersizes.js), create an issue or PR if you'd like me to add another standardized paper size to select from.
+
+You can also call `paper|ppr(width_mm, height_mm[, name[, is_portrait]])` at the beginning of your script to define a custom size for your plot.
