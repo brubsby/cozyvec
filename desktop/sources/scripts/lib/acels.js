@@ -95,9 +95,11 @@ function Acels (client) {
     return text.trim()
   }
 
-  // Electron specifics
+  this.injectWeb = () => {
+    this.set('Project', 'Docs', 'CmdOrCtrl+G', () => { window.open('https://github.com/brubsby/cozyvec#library', '_blank') })
+  }
 
-  this.inject = (name = 'Untitled', githubUser = 'hundredrabbits') => {
+  this.injectElectron = (name = 'Untitled', githubUser = 'hundredrabbits') => {
     const app = require('electron').remote.app
     const injection = []
 
@@ -105,7 +107,7 @@ function Acels (client) {
       label: name,
       submenu: [
         { label: 'About', click: () => { require('electron').shell.openExternal(`https://github.com/${githubUser}/${name}`) } },
-        { label: 'Documentation', click: () => { require('electron').shell.openExternal(`https://github.com/${githubUser}/${name}#Library`) } },
+        { label: 'Documentation', accelerator: 'CmdOrCtrl+G', click: () => { require('electron').shell.openExternal(`https://github.com/${githubUser}/${name}#Library`) } },
         { label: 'Fullscreen', accelerator: 'CmdOrCtrl+Enter', click: () => { app.toggleFullscreen() } },
         { label: 'Hide', accelerator: 'CmdOrCtrl+H', click: () => { app.toggleVisible() } },
         { label: 'Toggle Menubar', accelerator: 'Alt+H', click: () => { app.toggleMenubar() } },
