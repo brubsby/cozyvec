@@ -1,6 +1,6 @@
 # cozyvec
 
-cozyvec is a terminal program for creating [plotter](https://en.wikipedia.org/wiki/Plotter) art (specifically via SVG files) with minimal setup.
+cozyvec is a terminal program for creating [plotter](https://en.wikipedia.org/wiki/Plotter) art (specifically via SVG files) in javascript with minimal setup.
 
 ![Image](https://github.com/brubsby/cozyvec/blob/master/resources/web_example.png)
 
