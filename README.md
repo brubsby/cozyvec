@@ -70,3 +70,14 @@ Cross-platform build downloads to come soon
 - `nse|noise(pos)` [simplex noise](https://en.wikipedia.org/wiki/Simplex_noise) (pos can be a number or 1-4 numbers in a list)
 - `nse|noise(pos,freq,amp)` simplex noise
 - `nse|noise(pos,freq,amp,octaves,lacunarity,gain)` fractal simplex noise
+
+## Shortcuts
+
+- `CmdOrCtrl+G` documentation
+- `CmdOrCtrl+R` run code
+- `CmdOrCtrl+E` export SVG
+- `CmdOrCtrl+I` export PNG
+- `CmdOrCtrl+P` flip paper orientation
+- `CmdOrCtrl+N` new file
+- `CmdOrCtrl+O` open .cv file
+- `CmdOrCtrl+S` save .cv file
