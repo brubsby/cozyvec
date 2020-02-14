@@ -34,7 +34,8 @@ Cross-platform build downloads to come soon
 - `ppr|paper(w,h[,name[,orientation]])` custom paper in mm
 - `pen(w)` pen width in mm
 - `mbox|marginBox([a[,b[,c[,d]]]])` create bounding box with margins [x1,y1,x2,y2] default 40 mm, partial arguments follow css margin conventions
-- `err|error(s)` error and quit
+- `log(s)` log message s, gets overwritten by errors and other logs
+- `err|error(s)` error message s and quit
 - `W|WIDTH` canvas width
 - `H|HEIGHT` canvas height
 - `PI` π

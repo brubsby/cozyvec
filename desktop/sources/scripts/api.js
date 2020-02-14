@@ -115,7 +115,11 @@ function Api(client) {
     }
   }
 
-  this.error = (s = "Error") => {
+  this.log = function(s = '') {
+    client.codearea.setLog(s)
+  }
+
+  this.error = (s = 'Error') => {
     throw new Error(s)
   }
 
@@ -155,7 +159,8 @@ function Api(client) {
     [this.smooth_mid, ["smid","smoothMid"]],
     [()=>{}, ["ppr", "paper"]],
     [this.marginBox, ["mbox", "marginBox"]],
-    [this.error, ["err", "error"]]
+    [this.error, ["err", "error"]],
+    [this.log, ["log"]]
   ]
 
   this.run = function(txt) {
