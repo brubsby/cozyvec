@@ -83,15 +83,13 @@ function PaperSizes () {
     [ 'AxiDraw V3 XLX', 595, 218, 'Plotters' ]
   ]
 
-  this.asDict = function () {
-    const returnDict = {}
+  this.lookup = function (name) {
+    const upperName = name.toUpperCase()
     for (const paper of this.SIZES) {
-      returnDict[paper[0]] = paper.slice(1)
+      if (upperName == paper[0].toUpperCase().replace(/[-./\s]/,''))
+        return paper
     }
-    return returnDict
   }
-
-  this.SIZES_DICT = this.asDict()
 
   this.buildMenuTemplate = function(onClick) {
     const menuDict = {}

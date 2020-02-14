@@ -70,9 +70,9 @@ function Api(client) {
     const usageMsg = "usage: paper|ppr (s)|(w,h[,n[,o]])"
     if(args.length == 0) throw TypeError(usageMsg)
     if(typeof args[0] === 'string' || args[0] instanceof String) {
-      const paper_lookup = client.papersizes.SIZES_DICT[args[0]]
+      const paper_lookup = client.papersizes.lookup(args[0])
       if(paper_lookup) {
-        this.customPaper(paper_lookup[0], paper_lookup[1], args[0], args[1])
+        this.customPaper(paper_lookup[1], paper_lookup[2], paper_lookup[0], args[1])
       } else {
         throw new TypeError(`"${args[0]}" paper not found.`)
       }
@@ -167,8 +167,7 @@ function Api(client) {
   ]
 
   this.run = function(txt) {
-    txt += "\nmoveTo(0,0)"
-      this.seed((new Date()).getTime())
+    this.seed((new Date()).getTime())
     try {
       client.plotarea.reset()
       const beginningPaper = txt.match(/^(\s|\/\/[^\n]*\n|\/\*(.|\n)*?\*\/)*(ppr|paper)\([^\)]*\)/)
