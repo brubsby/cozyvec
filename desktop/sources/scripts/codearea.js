@@ -22,7 +22,7 @@ function CodeArea(client) {
     this._input.addEventListener('click', this.onClick)
 
     this._input.onkeydown = (e) => {
-      if (e.keyCode === 9 || e.which === 9) { e.preventDefault(); this.inject('  ') }
+      if (e.key === "Tab" && !e.ctrlKey) { e.preventDefault(); this.inject('  ') }
     }
   }
 
