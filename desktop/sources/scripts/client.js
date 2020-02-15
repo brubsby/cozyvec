@@ -23,10 +23,10 @@ function Client() {
     host.appendChild(this.el)
 
     this.acels.set('File', 'New', 'CmdOrCtrl+N', () => { this.source.new(); this.plotarea.reset(); this.codearea.clear() })
-    this.acels.set('File', 'Save', 'CmdOrCtrl+S', () => { this.source.write('cozyvec', 'cv', this.codearea._input.value, 'text/plain') })
+    this.acels.set('File', 'Save', 'CmdOrCtrl+S', () => { this.source.write('cozyvec', 'js', this.codearea._input.value, 'text/plain') })
     this.acels.set('File', 'Export SVG', 'CmdOrCtrl+E', () => { this.source.write('cozyvec', 'svg', this.plotarea.getSvg(), 'image/svg+xml') })
     this.acels.set('File', 'Export PNG', 'CmdOrCtrl+I', () => { this.source.write('cozyvec', 'png', this.plotarea.el.toDataURL('image/png', 1.0), 'image/png') })
-    this.acels.set('File', 'Open', 'CmdOrCtrl+O', () => { this.source.open('cv', this.whenOpen) })
+    this.acels.set('File', 'Open', 'CmdOrCtrl+O', () => { this.source.open('js', this.whenOpen) })
 
     this.acels.add('Edit', 'undo')
     this.acels.add('Edit', 'redo')

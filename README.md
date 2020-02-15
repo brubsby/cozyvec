@@ -81,8 +81,8 @@ Cross-platform build downloads to come soon
 - `CmdOrCtrl+I` export PNG
 - `CmdOrCtrl+P` flip paper orientation
 - `CmdOrCtrl+N` new file
-- `CmdOrCtrl+O` open .cv file
-- `CmdOrCtrl+S` save .cv file
+- `CmdOrCtrl+O` open .js file
+- `CmdOrCtrl+S` save .js file
 - `CmdOrCtrl+Tab` dev console
 
 
