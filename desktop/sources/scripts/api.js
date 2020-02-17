@@ -2,7 +2,7 @@ function Api(client) {
   this.simplex = new SimplexNoise()
   this.newFunctionStartLine = (() => {
     try {(new Function('undefined_function()'))()}
-    catch(e) {return parseInt(e.stack.match('(?<=<anonymous>:)\\d+'))}
+    catch(e) {return parseInt(e.stack.match(/<anonymous>:(\d+):\d+/)[1])}
     return 1
   })()
   this.newFunctionLineOffset = this.newFunctionStartLine - 1
@@ -190,9 +190,9 @@ function Api(client) {
       //delete global variables the user function created
       Object.keys(globalThis).filter(x => !globalKeys.includes(x)).forEach(x => delete globalThis[x])
     } catch(e) {
-      var lineInfo = e.stack.match('(?<=<anonymous>:)\\d+:\\d+')
+      var lineInfo = e.stack.match(/<anonymous>:(\d+:\d+)/)
       if (lineInfo) {
-        const lineInfoSplit = lineInfo[0].split(':')
+        const lineInfoSplit = lineInfo[1].split(':')
         lineInfo = `${lineInfoSplit[0]-this.newFunctionLineOffset}:${lineInfoSplit[1]}`
       }
       client.message(e.message + (lineInfo ? ` : ${lineInfo}` : ''))
