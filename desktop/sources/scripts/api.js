@@ -2,9 +2,17 @@ function Api(client) {
   this.simplex = new SimplexNoise()
   this.newFunctionStartLine = (() => {
     try {(new Function('undefined_function()'))()}
-    catch(e) {return e.lineNumber || parseInt(e.stack.match(/(<anonymous>|Function):(\d+):\d+/)[2])}
+    catch(e) {
+      if(e.lineNumber || e.line) {
+        return e.lineNumber
+      } else {
+        const match = e.stack.match(/(<anonymous>|Function):(\d+):\d+/)
+        if (match) {
+          return parseInt(match[2])
+        }
+      }
     return 1
-  })()
+  }})()
   this.newFunctionLineOffset = this.newFunctionStartLine - 1
 
   this.seed = (seed = 0) => {
