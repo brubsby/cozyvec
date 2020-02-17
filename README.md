@@ -12,7 +12,7 @@ The library has been designed for brevity, so the code for a specific plot can b
 
 Browser version available at: https://brubsby.github.io/cozyvec
 
-However, the Electron experience is more polished (menu items).
+However, the standalone builds are a better user experience (menu items)
 
 ## Install & Run
 
@@ -24,8 +24,6 @@ cd cozyvec/desktop/
 npm install
 npm start
 ```
-
-Cross-platform build downloads to come soon
 
 ## Library
 
