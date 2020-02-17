@@ -16,7 +16,7 @@ However, the Electron experience is more polished (menu items).
 
 ## Install & Run
 
-If you wish to use cozyvec inside of [Electron](https://electronjs.org/), follow these steps:
+You can download [builds](https://brubsby.itch.io/cozyvec) for OSX, Windows and Linux, or if you wish to build it yourself, follow these steps:
 
 ```
 git clone https://github.com/brubsby/cozyvec.git
