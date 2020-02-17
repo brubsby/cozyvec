@@ -5,7 +5,16 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf ~/Documents/cozyvec-darwin-x64/ && rm -rf ~/Documents/cozyvec-linux-x64/ && rm -rf ~/Documents/cozyvec-win32-x64/ && echo 'cleaned build location'",
+    "build_osx": "electron-packager . cozyvec --platform=darwin --arch=x64 --out ~/Documents/ --overwrite --icon=icon.icns && echo 'Built for OSX'",
+    "build_linux": "electron-packager . cozyvec --platform=linux  --arch=x64 --out ~/Documents/ --overwrite --icon=icon.ico && echo 'Built for LINUX'",
+    "build_win": "electron-packager . cozyvec --platform=win32  --arch=x64 --out ~/Documents/ --overwrite --icon=icon.ico && echo 'Built for WIN'",
+    "build": "npm run clean && npm run build_osx && npm run build_linux && npm run build_win",
+    "push_osx": "butler push ~/Documents/cozyvec-darwin-x64/ brubsby/cozyvec:osx-64",
+    "push_linux": "butler push ~/Documents/cozyvec-linux-x64/ brubsby/cozyvec:linux-64",
+    "push_win": "butler push ~/Documents/cozyvec-win32-x64/ brubsby/cozyvec:windows-64",
+    "status": "butler status brubsby/cozyvec",
+    "push": "npm run build && npm run push_osx && npm run push_linux && npm run push_win && npm run clean && npm run status"
   },
   "repository": {
     "type": "git",
@@ -14,7 +23,8 @@
   "keywords": [
     "svg",
     "generative",
-    "javascript"
+    "javascript",
+    "penplotter"
   ],
   "author": "brubsby",
   "license": "MIT",
@@ -22,5 +32,11 @@
     "url": "https://github.com/brubsby/cozyvec/issues"
   },
   "homepage": "https://github.com/brubsby/cozyvec#readme",
-  "dependencies": {}
+  "devDependencies": {
+    "electron": "^7.1.10",
+    "electron-packager": "^14.2.1"
+  },
+  "dependencies": {
+    "electron": "^7.1.10"
+  }
 }
