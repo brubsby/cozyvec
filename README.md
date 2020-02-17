@@ -25,8 +25,6 @@ npm install
 npm start
 ```
 
-Cross-platform build downloads to come soon
-
 ## Library
 
 - `l2|lineTo(x,y)` draw line from last point
