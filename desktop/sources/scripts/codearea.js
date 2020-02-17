@@ -76,6 +76,8 @@ function CodeArea(client) {
 
 // cmdorctrl+G for documentation
 // cmdorctrl+R to run
+// cmdorctrl+E to export SVG
+// cmdorctrl+I to export image
 
 paper("letter", true)
 pen(.6)
