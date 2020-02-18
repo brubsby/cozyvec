@@ -11,8 +11,8 @@ app.win = null
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   app.win = new BrowserWindow({
-   width: 800,
-   height: 600,
+   width: 1000,
+   height: 650,
    minWidth: 380,
    minHeight: 360,
    backgroundColor: '#000',
