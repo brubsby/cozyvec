@@ -90,6 +90,12 @@ Paper sizes are defined [here](https://github.com/brubsby/cozyvec/blob/master/de
 
 You can also call `paper|ppr(width_mm, height_mm[, name[, is_portrait]])` at the beginning of your script to define a custom size for your plot.
 
+## Community
+
+- [cozyvec hashtag](https://twitter.com/hashtag/cozyvec)
+- [cozyvectweets bot](https://twitter.com/cozyvectweets)
+- [/r/cozyvec on reddit](https://www.reddit.com/r/cozyvec/)
+
 ## Contributing
 
 Please [create an issue](https://github.com/brubsby/cozyvec/issues/new) if you have questions about behavior, find a bug, or want to make a feature/paper size request! I will also accept PR's, but might edit them first!
