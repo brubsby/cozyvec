@@ -137,6 +137,11 @@ function PlotArea(client) {
     this.currentPolyline = [[mm_x, mm_y]]
   }
 
+  this.flushAll = function() {
+      this.flushPolyline(0, 0)
+      this.flushPolylines()
+  }
+
   this.clear = function() {
     this.context.clearRect(0, 0, this.width, this.height)
   }
