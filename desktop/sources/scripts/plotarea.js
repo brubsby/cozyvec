@@ -92,18 +92,17 @@ function PlotArea(client) {
   }
 
   this.lineTo = function(mm_x, mm_y) {
-    this.context.lineCap = "round"
-    this.context.lineJoin = "round"
-    this.context.beginPath()
-    this.context.moveTo(this.mmToPixel(this.lastX), this.mmToPixel(this.lastY))
     this.context.lineTo(this.mmToPixel(mm_x), this.mmToPixel(mm_y))
-    this.context.stroke()
     this.currentPolyline.push([mm_x, mm_y])
     this.moveLastCoords(mm_x, mm_y)
   }
 
   this.moveTo = function(mm_x, mm_y) {
     this.flushPolyline(mm_x, mm_y)
+    this.context.beginPath()
+    this.context.lineCap = "round"
+    this.context.lineJoin = "round"
+    this.context.moveTo(this.mmToPixel(mm_x), this.mmToPixel(mm_y))
     this.moveLastMoveToCoords(mm_x, mm_y)
     this.moveLastCoords(mm_x, mm_y)
   }
@@ -131,8 +130,16 @@ function PlotArea(client) {
   }
 
   this.flushPolyline = function(mm_x, mm_y) {
-    if (this.currentPolyline.length > 1) this.currentPolylines.push(this.currentPolyline)
+    if (this.currentPolyline.length > 1) {
+      this.currentPolylines.push(this.currentPolyline)
+      this.context.stroke()
+    }
     this.currentPolyline = [[mm_x, mm_y]]
+  }
+
+  this.flushAll = function() {
+      this.flushPolyline(0, 0)
+      this.flushPolylines()
   }
 
   this.clear = function() {
@@ -141,10 +148,10 @@ function PlotArea(client) {
 
   this.reset = function() {
     this.clear()
-    this.moveTo(0, 0)
     this.groups = []
     this.currentPolylines = []
     this.currentPolyline = [[0, 0]]
+    this.moveTo(0, 0)
   }
 
   this.getSvg = function() {

@@ -195,6 +195,7 @@ function Api(client) {
       const drawFunction = new Function(...Object.keys(flatApi),txt)
       const globalKeys = Object.keys(globalThis)
       drawFunction(...Object.values(flatApi))
+      client.plotarea.flushAll()
       //delete global variables the user function created
       Object.keys(globalThis).filter(x => !globalKeys.includes(x)).forEach(x => delete globalThis[x])
     } catch(e) {
