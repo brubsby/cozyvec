@@ -71,7 +71,7 @@ function CodeArea(client) {
     }
   }
 
-  this.splash =
+  this.splash = Math.random() > .01 ?
 `// Welcome to cozyvec!
 
 // cmdorctrl+G for documentation
@@ -95,6 +95,79 @@ for(i = 0; i < num_lines; i++) {
     x = WIDTH * j / verts_per_line
     y = y + noise( [x,y], frequency, amplitude, octaves )
     if(abs(WIDTH/2-x) + abs(HEIGHT/2-y) < min(W,H)/4 ) {
+      ( t++ ? lineTo : moveTo )( x, y )
+    } else {
+      t = 0
+    }
+  }
+}`
+:
+`// Welcome to cozyvec!
+
+// cmdorctrl+G for documentation
+// cmdorctrl+R to run
+// cmdorctrl+E to export SVG
+// cmdorctrl+I to export image
+
+paper("letter", true)
+pen(.6)
+
+frequency = random(0.005, 0.04)
+amplitude = random(3, 9)
+octaves = floor(random(1, 3.25))
+num_lines = random(200, 300)
+verts_per_line = 999
+
+function isEllipse(x, y, X, Y, a, b) {
+    return pow(X-x, 2) / pow(a, 2) + pow(Y-y, 2) / pow(b, 2) < 1
+}
+
+function isCylinder(x, y, X, headY, assY, A, headB, assB) {
+    isHead = isEllipse(x, y, X, headY, A, headB)
+    isBody = (abs(X-x) < A)
+              && (abs(headY/2+assY/2 - y) < assY/2-headY/2)
+    isAss = isEllipse(x, y, X, assY, A, assB)
+    return isHead || isBody || isAss
+}
+
+headX = WIDTH/2
+headY = HEIGHT/3
+assY = HEIGHT/3 + 100
+headR = 60
+assB = 30
+legR = 20
+legXL = headX - (headR - legR)
+legXR = headX + (headR - legR)
+legH = 48
+bpW = 24
+bpR = 6
+visorX = legXR
+visorY = headY + headR / 3
+visorA = 44
+visorB = 32
+vW = 4
+
+for(i = 0; i < num_lines; i++) {
+  t = 0
+  for(j = 0; j < verts_per_line; j++) {
+    y = HEIGHT * i / num_lines
+    x = WIDTH * j / verts_per_line
+    y = y + noise( [x,y], frequency, amplitude, octaves )
+
+    isLeftLeg = isCylinder(x, y, legXL, assY, assY+legH, legR, legR, legR)
+    isRightLeg = isCylinder(x, y, legXR, assY, assY+legH, legR, legR, legR)
+    isBackpack = isCylinder(x, y, headX-headR, headY, assY, bpW, bpR, bpR)
+
+    isInnerVisor = isEllipse(x, y, visorX, visorY, visorA, visorB)
+    isOuterVisor = isEllipse(x, y, visorX, visorY, visorA + vW, visorB + vW)
+                  && !isInnerVisor
+
+    isBody = isCylinder(x, y, headX, headY, assY, headR, headR, assB)
+
+    if (
+      (isBody || isLeftLeg || isRightLeg || isBackpack || isInnerVisor)
+      && !isOuterVisor
+    ) {
       ( t++ ? lineTo : moveTo )( x, y )
     } else {
       t = 0
